@@ -1,10 +1,18 @@
+# Markdown
 Ref: http://wowubuntu.com/markdown/
 
-[标题](#标题)
+[标题](#标题)  
+[引用](#引用)  
+[列表](#列表)  
+[代码区块](#代码区块)  
+[分隔线](#分隔线)  
+[链接](#链接)  
+[强调](#强调)  
+[图片](#图片)  
 
 ***************************************
 
-# 标题
+## 标题
 ``` markdown
 # 标题1
 ## 标题2
@@ -16,7 +24,7 @@ Ref: http://wowubuntu.com/markdown/
 
 ***************************************
 
-# 引用
+## 引用
 ``` markdown
 > 引用
 ```
@@ -24,7 +32,7 @@ Ref: http://wowubuntu.com/markdown/
 
 ***************************************
 
-# 列表
+## 列表
 ``` markdown
 *   Red
 *   Green
@@ -54,7 +62,7 @@ Ref: http://wowubuntu.com/markdown/
 
 ***************************************
 
-# 代码区块
+## 代码区块
 ``` markdown
 这是一个普通段落：
 
@@ -66,7 +74,7 @@ Ref: http://wowubuntu.com/markdown/
 
 ***************************************
 
-# 分隔线
+## 分隔线
 ``` markdown
 * * *
 
@@ -90,7 +98,7 @@ Ref: http://wowubuntu.com/markdown/
 
 ***************************************
 
-# 链接
+## 链接
 ``` markdown
 This is [an example](http://example.com/ "Title") inline link.  
 [This link](http://example.net/) has no title attribute. 
@@ -134,7 +142,7 @@ I get 10 times more traffic from [Google][] than from
 
 ***************************************
 
-# 强调
+## 强调
 ``` markdown
 *single asterisks*
 
@@ -158,7 +166,7 @@ __double underscores__
 
 ***************************************
 
-# 图片
+## 图片
 ``` markdown
 ![Github Icon](https://assets-cdn.github.com/favicon.ico)
 ![Github Icon](https://assets-cdn.github.com/favicon.ico "Github Icon")
