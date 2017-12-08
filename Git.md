@@ -9,3 +9,4 @@ Git
 配置记住用户名密码
 > git config --global credential.helper store
 >> 配置之后，通过VSCode提交代码，还是不会记住密码，汗..
+>>> 经测试，在VSCode Terminal提交一次之后，在用界面方式提交，就可以不用输用户密码了，囧
