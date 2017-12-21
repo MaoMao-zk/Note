@@ -14,3 +14,8 @@ Git
 忽略文件权限
 > git config core.filemode false  // 当前版本库  
 > git config --global core.fileMode false // 所有版本库
+
+配置代理
+> http.proxy=109.123.97.11:8080    //http代理  
+> http.sslverify=false             //不检查证书  
+> https.proxy=109.123.97.11:8080   //https代理  
