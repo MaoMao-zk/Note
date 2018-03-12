@@ -19,10 +19,3 @@ https://gist.github.com/ivanlukianchuk/e74d0f786c1beae9c0c6
 Just For Test:  
 $f(n)=\Theta(g(n))$  
 $$f(n)=\Theta(g(n))$$  
-```math
-f(n)=\Theta(g(n))
-```
-```math
-$f(n)=\Theta(g(n))$
-```
-$`f(n)=\Theta(g(n))`$
