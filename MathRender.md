@@ -1,4 +1,10 @@
 
+Latex Math support in VSCode(Markdown+Math):  
+https://marketplace.visualstudio.com/items?itemName=goessner.mdmath
+
+Latex Math support in Github(Chrome extension):  
+https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima
+
 [Function Support in KaTex](https://khan.github.io/KaTeX/function-support.html)
 
 
