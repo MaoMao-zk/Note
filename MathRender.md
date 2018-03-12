@@ -1,4 +1,6 @@
 
+## Tools
+
 Latex Math support in VSCode(Markdown+Math):  
 https://marketplace.visualstudio.com/items?itemName=goessner.mdmath
 
@@ -7,6 +9,8 @@ https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllac
 
 [Function Support in KaTex](https://khan.github.io/KaTeX/function-support.html)
 
+
+## Github will not support math renderring in markdown.
 
 [Github will not support math renderring in markdown.](https://github.com/github/markup/issues/897)  
 a good suggetion:
@@ -21,7 +25,20 @@ screen shot 2017-05-11 at 8 33 41 pm
 https://gist.github.com/ivanlukianchuk/e74d0f786c1beae9c0c6
 ```
 
+## Issues
+#### Chrome extension has issue:
+> Missing or unrecognized delimiter for \left
+https://github.com/orsharir/github-mathjax/issues/16
 
-Just For Test:  
+## Just For Test:  
 $f(n)=\Theta(g(n))$  
 $$f(n)=\Theta(g(n))$$  
+
+$$
+P(n) = \left \{
+    \begin{aligned}
+    & 1 &                            if \quad n = 1, \\
+    & \sum_{k=1}^{n-1}P(k)P(n-k) &   if \quad n \ge 2,
+    \end{aligned}
+\right.
+$$
