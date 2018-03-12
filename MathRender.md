@@ -1,4 +1,17 @@
 
+
+## Learn
+#### 常用数学符号的 LaTeX 表示方法
+> http://mohu.org/info/symbols/symbols.htm
+#### LaTeX大括号用法
+http://blog.csdn.net/l740450789/article/details/49487847
+#### 如何使上下限出现在求和、积分符号的上下方而不是右边？
+> http://blog.sina.com.cn/s/blog_5e16f1770100g7l5.html
+#### LaTeX/Mathematics WIKI
+> https://en.wikibooks.org/wiki/LaTeX/Mathematics
+#### Function Support in KaTex
+> https://khan.github.io/KaTeX/function-support.html
+
 ## Tools
 
 Latex Math support in VSCode(Markdown+Math):  
@@ -7,7 +20,6 @@ https://marketplace.visualstudio.com/items?itemName=goessner.mdmath
 Latex Math support in Github(Chrome extension):  
 https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima
 
-[Function Support in KaTex](https://khan.github.io/KaTeX/function-support.html)
 
 
 ## Github will not support math renderring in markdown.
