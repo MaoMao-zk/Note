@@ -37,3 +37,8 @@ git clean 参数
 也可以使用：
 git checkout . && git clean -xdf
 ```
+
+拉一个分支
+``` bash
+git clone [url] -b [branch name] --single-branch
+```
