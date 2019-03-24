@@ -1,0 +1,2069 @@
+MaoMao@MaoMao-Laptop MINGW64 /workspace/fork/electron-gn
+$ gclient sync --with_branch_heads --with_tags
+
+________ running 'git -c core.deltaBaseCacheLimit=2g clone --no-checkout --progress https://github.com/maomao9003/electron D:\Program Files\Git\workspace\fork\electron-gn\src\_gclient_electron_a2sz4p' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+Cloning into 'D:\Program Files\Git\workspace\fork\electron-gn\src\_gclient_electron_a2sz4p'...
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (4/4), done.
+Receiving objects:  33% (48630/145467), 23.15 MiB | 236.00 KiB/s
+[0:01:00] Still working on:
+[0:01:00]   src/electron
+Receiving objects:  37% (53823/145467), 25.23 MiB | 197.00 KiB/s
+[0:01:10] Still working on:
+[0:01:10]   src/electron
+Receiving objects:  43% (62740/145467), 28.96 MiB | 450.00 KiB/s
+[0:01:20] Still working on:
+[0:01:20]   src/electron
+Receiving objects:  73% (106191/145467), 40.50 MiB | 1.28 MiB/s
+[0:01:30] Still working on:
+[0:01:30]   src/electron
+remote: Total 145467 (delta 0), reused 4 (delta 0), pack-reused 145463
+Receiving objects: 100% (145467/145467), 47.36 MiB | 513.00 KiB/s, done.
+Resolving deltas: 100% (107469/107469), done.
+
+[0:01:40] Still working on:
+[0:01:40]   src/electron
+Syncing projects:   0% ( 0/ 2)
+[0:01:41] Still working on:
+[0:01:41]   src/electron
+Syncing projects:  33% ( 1/ 3) src/electron
+[0:02:41] Still working on:
+[0:02:41]   src
+
+[0:02:51] Still working on:
+[0:02:51]   src
+
+[0:03:01] Still working on:
+[0:03:01]   src
+
+[0:03:11] Still working on:
+[0:03:11]   src
+
+[0:03:21] Still working on:
+[0:03:21]   src
+
+[0:03:31] Still working on:
+[0:03:31]   src
+
+[0:03:41] Still working on:
+[0:03:41]   src
+
+[0:03:51] Still working on:
+[0:03:51]   src
+
+[0:04:01] Still working on:
+[0:04:01]   src
+
+[0:04:11] Still working on:
+[0:04:11]   src
+
+[0:04:21] Still working on:
+[0:04:21]   src
+
+[0:04:31] Still working on:
+[0:04:31]   src
+
+[0:04:41] Still working on:
+[0:04:41]   src
+
+[0:04:51] Still working on:
+[0:04:51]   src
+
+[0:05:01] Still working on:
+[0:05:01]   src
+
+[0:05:11] Still working on:
+[0:05:11]   src
+
+[0:05:21] Still working on:
+[0:05:21]   src
+
+[0:05:31] Still working on:
+[0:05:31]   src
+
+[0:05:41] Still working on:
+[0:05:41]   src
+
+[0:05:51] Still working on:
+[0:05:51]   src
+
+[0:06:01] Still working on:
+[0:06:01]   src
+
+[0:06:11] Still working on:
+[0:06:11]   src
+
+[0:06:21] Still working on:
+[0:06:21]   src
+
+[0:06:31] Still working on:
+[0:06:31]   src
+
+[0:06:41] Still working on:
+[0:06:41]   src
+
+[0:06:51] Still working on:
+[0:06:51]   src
+
+[0:07:01] Still working on:
+[0:07:01]   src
+
+[0:07:11] Still working on:
+[0:07:11]   src
+
+[0:07:21] Still working on:
+[0:07:21]   src
+
+[0:07:31] Still working on:
+[0:07:31]   src
+
+[0:07:41] Still working on:
+[0:07:41]   src
+
+[0:07:51] Still working on:
+[0:07:51]   src
+
+[0:08:01] Still working on:
+[0:08:01]   src
+
+[0:08:11] Still working on:
+[0:08:11]   src
+
+[0:08:21] Still working on:
+[0:08:21]   src
+
+[0:08:31] Still working on:
+[0:08:31]   src
+
+[0:08:41] Still working on:
+[0:08:41]   src
+
+[0:08:51] Still working on:
+[0:08:51]   src
+
+[0:09:01] Still working on:
+[0:09:01]   src
+
+[0:09:11] Still working on:
+[0:09:11]   src
+
+[0:09:21] Still working on:
+[0:09:21]   src
+
+[0:09:31] Still working on:
+[0:09:31]   src
+
+[0:09:41] Still working on:
+[0:09:41]   src
+
+[0:09:51] Still working on:
+[0:09:51]   src
+
+[0:10:01] Still working on:
+[0:10:01]   src
+
+[0:10:11] Still working on:
+[0:10:11]   src
+
+[0:10:21] Still working on:
+[0:10:21]   src
+
+[0:10:31] Still working on:
+[0:10:31]   src
+
+[0:10:41] Still working on:
+[0:10:41]   src
+
+[0:10:51] Still working on:
+[0:10:51]   src
+
+[0:11:01] Still working on:
+[0:11:01]   src
+
+[0:11:11] Still working on:
+[0:11:11]   src
+
+[0:11:21] Still working on:
+[0:11:21]   src
+
+[0:11:31] Still working on:
+[0:11:31]   src
+
+[0:11:41] Still working on:
+[0:11:41]   src
+
+[0:11:51] Still working on:
+[0:11:51]   src
+
+[0:12:01] Still working on:
+[0:12:01]   src
+
+[0:12:11] Still working on:
+[0:12:11]   src
+
+[0:12:21] Still working on:
+[0:12:21]   src
+
+[0:12:31] Still working on:
+[0:12:31]   src
+
+[0:12:41] Still working on:
+[0:12:41]   src
+
+[0:12:51] Still working on:
+[0:12:51]   src
+
+[0:13:01] Still working on:
+[0:13:01]   src
+
+[0:13:11] Still working on:
+[0:13:11]   src
+
+[0:13:21] Still working on:
+[0:13:21]   src
+
+[0:13:31] Still working on:
+[0:13:31]   src
+
+[0:13:41] Still working on:
+[0:13:41]   src
+
+[0:13:51] Still working on:
+[0:13:51]   src
+
+[0:14:01] Still working on:
+[0:14:01]   src
+
+[0:14:11] Still working on:
+[0:14:11]   src
+
+[0:14:21] Still working on:
+[0:14:21]   src
+
+[0:14:31] Still working on:
+[0:14:31]   src
+
+[0:14:41] Still working on:
+[0:14:41]   src
+
+[0:14:51] Still working on:
+[0:14:51]   src
+
+[0:15:01] Still working on:
+[0:15:01]   src
+
+[0:15:11] Still working on:
+[0:15:11]   src
+
+[0:15:21] Still working on:
+[0:15:21]   src
+
+[0:15:31] Still working on:
+[0:15:31]   src
+
+[0:15:41] Still working on:
+[0:15:41]   src
+
+[0:15:51] Still working on:
+[0:15:51]   src
+
+[0:16:01] Still working on:
+[0:16:01]   src
+
+[0:16:11] Still working on:
+[0:16:11]   src
+
+[0:16:21] Still working on:
+[0:16:21]   src
+
+[0:16:31] Still working on:
+[0:16:31]   src
+
+[0:16:41] Still working on:
+[0:16:41]   src
+
+[0:16:51] Still working on:
+[0:16:51]   src
+
+[0:17:01] Still working on:
+[0:17:01]   src
+
+[0:17:11] Still working on:
+[0:17:11]   src
+
+[0:17:21] Still working on:
+[0:17:21]   src
+
+[0:17:31] Still working on:
+[0:17:31]   src
+
+[0:17:41] Still working on:
+[0:17:41]   src
+
+[0:17:51] Still working on:
+[0:17:51]   src
+
+[0:18:01] Still working on:
+[0:18:01]   src
+
+[0:18:11] Still working on:
+[0:18:11]   src
+
+[0:18:21] Still working on:
+[0:18:21]   src
+
+[0:18:31] Still working on:
+[0:18:31]   src
+
+[0:18:41] Still working on:
+[0:18:41]   src
+
+[0:18:51] Still working on:
+[0:18:51]   src
+
+[0:19:01] Still working on:
+[0:19:01]   src
+
+[0:19:11] Still working on:
+[0:19:11]   src
+
+[0:19:21] Still working on:
+[0:19:21]   src
+
+[0:19:31] Still working on:
+[0:19:31]   src
+
+[0:19:41] Still working on:
+[0:19:41]   src
+
+[0:19:51] Still working on:
+[0:19:51]   src
+
+[0:20:01] Still working on:
+[0:20:01]   src
+
+[0:20:11] Still working on:
+[0:20:11]   src
+
+[0:20:21] Still working on:
+[0:20:21]   src
+
+[0:20:31] Still working on:
+[0:20:31]   src
+
+[0:20:41] Still working on:
+[0:20:41]   src
+
+[0:20:51] Still working on:
+[0:20:51]   src
+
+[0:21:01] Still working on:
+[0:21:01]   src
+
+[0:21:11] Still working on:
+[0:21:11]   src
+
+[0:21:21] Still working on:
+[0:21:21]   src
+
+[0:21:31] Still working on:
+[0:21:31]   src
+
+[0:21:41] Still working on:
+[0:21:41]   src
+
+[0:21:51] Still working on:
+[0:21:51]   src
+
+[0:22:01] Still working on:
+[0:22:01]   src
+
+[0:22:11] Still working on:
+[0:22:11]   src
+
+[0:22:21] Still working on:
+[0:22:21]   src
+
+[0:22:31] Still working on:
+[0:22:31]   src
+
+[0:22:41] Still working on:
+[0:22:41]   src
+
+[0:22:51] Still working on:
+[0:22:51]   src
+
+[0:23:01] Still working on:
+[0:23:01]   src
+
+[0:23:11] Still working on:
+[0:23:11]   src
+
+[0:23:21] Still working on:
+[0:23:21]   src
+
+[0:23:31] Still working on:
+[0:23:31]   src
+
+[0:23:41] Still working on:
+[0:23:41]   src
+
+[0:23:51] Still working on:
+[0:23:51]   src
+
+[0:24:01] Still working on:
+[0:24:01]   src
+
+[0:24:11] Still working on:
+[0:24:11]   src
+
+[0:24:21] Still working on:
+[0:24:21]   src
+
+[0:24:31] Still working on:
+[0:24:31]   src
+
+[0:24:41] Still working on:
+[0:24:41]   src
+
+[0:24:51] Still working on:
+[0:24:51]   src
+
+[0:25:01] Still working on:
+[0:25:01]   src
+
+[0:25:11] Still working on:
+[0:25:11]   src
+
+[0:25:21] Still working on:
+[0:25:21]   src
+
+[0:25:31] Still working on:
+[0:25:31]   src
+
+[0:25:41] Still working on:
+[0:25:41]   src
+
+[0:25:51] Still working on:
+[0:25:51]   src
+
+[0:26:01] Still working on:
+[0:26:01]   src
+
+[0:26:11] Still working on:
+[0:26:11]   src
+
+[0:26:21] Still working on:
+[0:26:21]   src
+
+[0:26:31] Still working on:
+[0:26:31]   src
+
+[0:26:41] Still working on:
+[0:26:41]   src
+
+[0:26:51] Still working on:
+[0:26:51]   src
+
+[0:27:01] Still working on:
+[0:27:01]   src
+
+[0:27:11] Still working on:
+[0:27:11]   src
+
+[0:27:21] Still working on:
+[0:27:21]   src
+
+[0:27:31] Still working on:
+[0:27:31]   src
+
+[0:27:41] Still working on:
+[0:27:41]   src
+
+[0:27:51] Still working on:
+[0:27:51]   src
+
+[0:28:01] Still working on:
+[0:28:01]   src
+
+[0:28:11] Still working on:
+[0:28:11]   src
+
+[0:28:21] Still working on:
+[0:28:21]   src
+
+[0:28:31] Still working on:
+[0:28:31]   src
+
+[0:28:41] Still working on:
+[0:28:41]   src
+
+[0:28:51] Still working on:
+[0:28:51]   src
+
+[0:29:01] Still working on:
+[0:29:01]   src
+
+[0:29:11] Still working on:
+[0:29:11]   src
+
+[0:29:21] Still working on:
+[0:29:21]   src
+
+[0:29:31] Still working on:
+[0:29:31]   src
+
+[0:29:41] Still working on:
+[0:29:41]   src
+
+[0:29:51] Still working on:
+[0:29:51]   src
+
+[0:30:01] Still working on:
+[0:30:01]   src
+
+[0:30:11] Still working on:
+[0:30:11]   src
+
+[0:30:21] Still working on:
+[0:30:21]   src
+
+[0:30:31] Still working on:
+[0:30:31]   src
+
+[0:30:41] Still working on:
+[0:30:41]   src
+
+[0:30:51] Still working on:
+[0:30:51]   src
+
+[0:31:01] Still working on:
+[0:31:01]   src
+
+[0:31:11] Still working on:
+[0:31:11]   src
+
+[0:31:21] Still working on:
+[0:31:21]   src
+
+[0:31:31] Still working on:
+[0:31:31]   src
+
+[0:31:41] Still working on:
+[0:31:41]   src
+
+[0:31:51] Still working on:
+[0:31:51]   src
+
+[0:32:01] Still working on:
+[0:32:01]   src
+
+[0:32:11] Still working on:
+[0:32:11]   src
+
+[0:32:21] Still working on:
+[0:32:21]   src
+
+[0:32:31] Still working on:
+[0:32:31]   src
+
+[0:32:41] Still working on:
+[0:32:41]   src
+
+[0:32:51] Still working on:
+[0:32:51]   src
+
+[0:33:01] Still working on:
+[0:33:01]   src
+
+[0:33:11] Still working on:
+[0:33:11]   src
+
+[0:33:21] Still working on:
+[0:33:21]   src
+
+[0:33:31] Still working on:
+[0:33:31]   src
+
+[0:33:41] Still working on:
+[0:33:41]   src
+
+[0:33:51] Still working on:
+[0:33:51]   src
+
+[0:34:01] Still working on:
+[0:34:01]   src
+
+[0:34:11] Still working on:
+[0:34:11]   src
+
+[0:34:21] Still working on:
+[0:34:21]   src
+
+[0:34:31] Still working on:
+[0:34:31]   src
+
+[0:34:41] Still working on:
+[0:34:41]   src
+
+[0:34:51] Still working on:
+[0:34:51]   src
+
+[0:35:01] Still working on:
+[0:35:01]   src
+
+[0:35:11] Still working on:
+[0:35:11]   src
+
+[0:35:21] Still working on:
+[0:35:21]   src
+
+[0:35:31] Still working on:
+[0:35:31]   src
+
+[0:35:41] Still working on:
+[0:35:41]   src
+
+[0:35:51] Still working on:
+[0:35:51]   src
+
+[0:36:01] Still working on:
+[0:36:01]   src
+
+[0:36:11] Still working on:
+[0:36:11]   src
+
+[0:36:21] Still working on:
+[0:36:21]   src
+
+[0:36:31] Still working on:
+[0:36:31]   src
+
+[0:36:41] Still working on:
+[0:36:41]   src
+
+[0:36:51] Still working on:
+[0:36:51]   src
+
+[0:37:01] Still working on:
+[0:37:01]   src
+
+[0:37:11] Still working on:
+[0:37:11]   src
+
+[0:37:21] Still working on:
+[0:37:21]   src
+
+[0:37:31] Still working on:
+[0:37:31]   src
+
+[0:37:41] Still working on:
+[0:37:41]   src
+
+[0:37:51] Still working on:
+[0:37:51]   src
+
+[0:38:01] Still working on:
+[0:38:01]   src
+
+[0:38:11] Still working on:
+[0:38:11]   src
+
+[0:38:21] Still working on:
+[0:38:21]   src
+
+[0:38:31] Still working on:
+[0:38:31]   src
+
+[0:38:41] Still working on:
+[0:38:41]   src
+
+[0:38:51] Still working on:
+[0:38:51]   src
+
+[0:39:01] Still working on:
+[0:39:01]   src
+
+[0:39:11] Still working on:
+[0:39:11]   src
+
+[0:39:21] Still working on:
+[0:39:21]   src
+
+[0:39:31] Still working on:
+[0:39:31]   src
+
+[0:39:41] Still working on:
+[0:39:41]   src
+
+[0:39:51] Still working on:
+[0:39:51]   src
+
+[0:40:01] Still working on:
+[0:40:01]   src
+
+[0:40:11] Still working on:
+[0:40:11]   src
+
+[0:40:21] Still working on:
+[0:40:21]   src
+
+[0:40:31] Still working on:
+[0:40:31]   src
+
+[0:40:41] Still working on:
+[0:40:41]   src
+
+[0:40:51] Still working on:
+[0:40:51]   src
+
+[0:41:01] Still working on:
+[0:41:01]   src
+
+[0:41:11] Still working on:
+[0:41:11]   src
+
+[0:41:21] Still working on:
+[0:41:21]   src
+
+[0:41:31] Still working on:
+[0:41:31]   src
+
+[0:41:41] Still working on:
+[0:41:41]   src
+
+[0:41:51] Still working on:
+[0:41:51]   src
+
+[0:42:01] Still working on:
+[0:42:01]   src
+
+[0:42:11] Still working on:
+[0:42:11]   src
+
+[0:42:21] Still working on:
+[0:42:21]   src
+
+[0:42:31] Still working on:
+[0:42:31]   src
+
+[0:42:41] Still working on:
+[0:42:41]   src
+
+[0:42:51] Still working on:
+[0:42:51]   src
+
+[0:43:01] Still working on:
+[0:43:01]   src
+
+[0:43:11] Still working on:
+[0:43:11]   src
+
+[0:43:21] Still working on:
+[0:43:21]   src
+
+[0:43:31] Still working on:
+[0:43:31]   src
+
+[0:43:41] Still working on:
+[0:43:41]   src
+
+[0:43:51] Still working on:
+[0:43:51]   src
+
+[0:44:01] Still working on:
+[0:44:01]   src
+
+[0:44:11] Still working on:
+[0:44:11]   src
+
+[0:44:21] Still working on:
+[0:44:21]   src
+
+[0:44:31] Still working on:
+[0:44:31]   src
+
+[0:44:41] Still working on:
+[0:44:41]   src
+
+[0:44:51] Still working on:
+[0:44:51]   src
+
+[0:45:01] Still working on:
+[0:45:01]   src
+
+[0:45:11] Still working on:
+[0:45:11]   src
+
+[0:45:21] Still working on:
+[0:45:21]   src
+
+[0:45:31] Still working on:
+[0:45:31]   src
+
+[0:45:41] Still working on:
+[0:45:41]   src
+
+[0:45:51] Still working on:
+[0:45:51]   src
+
+[0:46:01] Still working on:
+[0:46:01]   src
+
+[0:46:11] Still working on:
+[0:46:11]   src
+
+[0:46:21] Still working on:
+[0:46:21]   src
+
+[0:46:31] Still working on:
+[0:46:31]   src
+
+[0:46:41] Still working on:
+[0:46:41]   src
+
+[0:46:51] Still working on:
+[0:46:51]   src
+
+[0:47:01] Still working on:
+[0:47:01]   src
+
+[0:47:11] Still working on:
+[0:47:11]   src
+
+[0:47:21] Still working on:
+[0:47:21]   src
+
+[0:47:31] Still working on:
+[0:47:31]   src
+
+[0:47:41] Still working on:
+[0:47:41]   src
+
+[0:47:51] Still working on:
+[0:47:51]   src
+
+[0:48:01] Still working on:
+[0:48:01]   src
+
+[0:48:11] Still working on:
+[0:48:11]   src
+
+[0:48:21] Still working on:
+[0:48:21]   src
+
+[0:48:31] Still working on:
+[0:48:31]   src
+
+[0:48:41] Still working on:
+[0:48:41]   src
+
+[0:48:51] Still working on:
+[0:48:51]   src
+
+[0:49:01] Still working on:
+[0:49:01]   src
+
+[0:49:11] Still working on:
+[0:49:11]   src
+
+[0:49:21] Still working on:
+[0:49:21]   src
+
+[0:49:31] Still working on:
+[0:49:31]   src
+
+[0:49:41] Still working on:
+[0:49:41]   src
+
+[0:49:51] Still working on:
+[0:49:51]   src
+
+[0:50:01] Still working on:
+[0:50:01]   src
+
+[0:50:11] Still working on:
+[0:50:11]   src
+
+[0:50:21] Still working on:
+[0:50:21]   src
+
+[0:50:31] Still working on:
+[0:50:31]   src
+
+[0:50:41] Still working on:
+[0:50:41]   src
+
+[0:50:51] Still working on:
+[0:50:51]   src
+
+[0:51:01] Still working on:
+[0:51:01]   src
+
+[0:51:11] Still working on:
+[0:51:11]   src
+
+[0:51:21] Still working on:
+[0:51:21]   src
+
+[0:51:31] Still working on:
+[0:51:31]   src
+
+[0:51:41] Still working on:
+[0:51:41]   src
+
+[0:51:51] Still working on:
+[0:51:51]   src
+
+[0:52:01] Still working on:
+[0:52:01]   src
+
+[0:52:11] Still working on:
+[0:52:11]   src
+
+[0:52:21] Still working on:
+[0:52:21]   src
+
+[0:52:31] Still working on:
+[0:52:31]   src
+
+[0:52:41] Still working on:
+[0:52:41]   src
+
+[0:52:51] Still working on:
+[0:52:51]   src
+
+[0:53:01] Still working on:
+[0:53:01]   src
+
+[0:53:11] Still working on:
+[0:53:11]   src
+
+[0:53:21] Still working on:
+[0:53:21]   src
+
+[0:53:31] Still working on:
+[0:53:31]   src
+
+[0:53:41] Still working on:
+[0:53:41]   src
+
+[0:53:51] Still working on:
+[0:53:51]   src
+
+[0:54:01] Still working on:
+[0:54:01]   src
+
+[0:54:11] Still working on:
+[0:54:11]   src
+
+[0:54:21] Still working on:
+[0:54:21]   src
+
+[0:54:31] Still working on:
+[0:54:31]   src
+
+[0:54:41] Still working on:
+[0:54:41]   src
+
+[0:54:51] Still working on:
+[0:54:51]   src
+
+[0:55:01] Still working on:
+[0:55:01]   src
+
+[0:55:11] Still working on:
+[0:55:11]   src
+
+[0:55:21] Still working on:
+[0:55:21]   src
+
+[0:55:31] Still working on:
+[0:55:31]   src
+
+[0:55:41] Still working on:
+[0:55:41]   src
+
+[0:55:51] Still working on:
+[0:55:51]   src
+
+[0:56:01] Still working on:
+[0:56:01]   src
+
+[0:56:11] Still working on:
+[0:56:11]   src
+
+[0:56:21] Still working on:
+[0:56:21]   src
+
+[0:56:31] Still working on:
+[0:56:31]   src
+
+[0:56:41] Still working on:
+[0:56:41]   src
+
+[0:56:51] Still working on:
+[0:56:51]   src
+
+[0:57:01] Still working on:
+[0:57:01]   src
+
+[0:57:11] Still working on:
+[0:57:11]   src
+
+[0:57:21] Still working on:
+[0:57:21]   src
+
+[0:57:31] Still working on:
+[0:57:31]   src
+
+[0:57:41] Still working on:
+[0:57:41]   src
+
+[0:57:51] Still working on:
+[0:57:51]   src
+
+[0:58:01] Still working on:
+[0:58:01]   src
+
+[0:58:11] Still working on:
+[0:58:11]   src
+
+[0:58:21] Still working on:
+[0:58:21]   src
+
+[0:58:31] Still working on:
+[0:58:31]   src
+
+[0:58:41] Still working on:
+[0:58:41]   src
+
+[0:58:51] Still working on:
+[0:58:51]   src
+
+[0:59:01] Still working on:
+[0:59:01]   src
+
+[0:59:11] Still working on:
+[0:59:11]   src
+
+[0:59:21] Still working on:
+[0:59:21]   src
+
+[0:59:31] Still working on:
+[0:59:31]   src
+
+[0:59:41] Still working on:
+[0:59:41]   src
+
+[0:59:51] Still working on:
+[0:59:51]   src
+
+[1:00:01] Still working on:
+[1:00:01]   src
+
+[1:00:11] Still working on:
+[1:00:11]   src
+
+[1:00:21] Still working on:
+[1:00:21]   src
+
+[1:00:31] Still working on:
+[1:00:31]   src
+
+[1:00:41] Still working on:
+[1:00:41]   src
+
+[1:00:51] Still working on:
+[1:00:51]   src
+
+[1:01:01] Still working on:
+[1:01:01]   src
+
+[1:01:11] Still working on:
+[1:01:11]   src
+
+[1:01:21] Still working on:
+[1:01:21]   src
+
+[1:01:31] Still working on:
+[1:01:31]   src
+
+[1:01:41] Still working on:
+[1:01:41]   src
+
+[1:01:51] Still working on:
+[1:01:51]   src
+
+[1:02:01] Still working on:
+[1:02:01]   src
+
+[1:02:11] Still working on:
+[1:02:11]   src
+
+[1:02:21] Still working on:
+[1:02:21]   src
+
+[1:02:31] Still working on:
+[1:02:31]   src
+
+[1:02:41] Still working on:
+[1:02:41]   src
+
+[1:02:51] Still working on:
+[1:02:51]   src
+
+[1:03:01] Still working on:
+[1:03:01]   src
+
+[1:03:11] Still working on:
+[1:03:11]   src
+
+[1:03:21] Still working on:
+[1:03:21]   src
+
+[1:03:31] Still working on:
+[1:03:31]   src
+
+[1:03:41] Still working on:
+[1:03:41]   src
+
+[1:03:51] Still working on:
+[1:03:51]   src
+
+[1:04:01] Still working on:
+[1:04:01]   src
+
+[1:04:11] Still working on:
+[1:04:11]   src
+
+[1:04:21] Still working on:
+[1:04:21]   src
+
+[1:04:31] Still working on:
+[1:04:31]   src
+
+[1:04:41] Still working on:
+[1:04:41]   src
+
+[1:04:51] Still working on:
+[1:04:51]   src
+
+[1:05:01] Still working on:
+[1:05:01]   src
+
+[1:05:11] Still working on:
+[1:05:11]   src
+
+[1:05:21] Still working on:
+[1:05:21]   src
+
+[1:05:31] Still working on:
+[1:05:31]   src
+
+[1:05:41] Still working on:
+[1:05:41]   src
+
+[1:05:51] Still working on:
+[1:05:51]   src
+
+[1:06:01] Still working on:
+[1:06:01]   src
+
+[1:06:11] Still working on:
+[1:06:11]   src
+
+[1:06:21] Still working on:
+[1:06:21]   src
+
+[1:06:31] Still working on:
+[1:06:31]   src
+
+[1:06:41] Still working on:
+[1:06:41]   src
+
+[1:06:51] Still working on:
+[1:06:51]   src
+
+[1:07:01] Still working on:
+[1:07:01]   src
+
+[1:07:11] Still working on:
+[1:07:11]   src
+
+[1:07:21] Still working on:
+[1:07:21]   src
+
+[1:07:31] Still working on:
+[1:07:31]   src
+
+[1:07:41] Still working on:
+[1:07:41]   src
+
+[1:07:51] Still working on:
+[1:07:51]   src
+
+[1:08:01] Still working on:
+[1:08:01]   src
+
+[1:08:11] Still working on:
+[1:08:11]   src
+
+[1:08:21] Still working on:
+[1:08:21]   src
+
+[1:08:31] Still working on:
+[1:08:31]   src
+
+[1:08:41] Still working on:
+[1:08:41]   src
+
+[1:08:51] Still working on:
+[1:08:51]   src
+
+[1:09:01] Still working on:
+[1:09:01]   src
+
+[1:09:11] Still working on:
+[1:09:11]   src
+
+[1:09:21] Still working on:
+[1:09:21]   src
+
+[1:09:31] Still working on:
+[1:09:31]   src
+
+[1:09:41] Still working on:
+[1:09:41]   src
+
+[1:09:51] Still working on:
+[1:09:51]   src
+
+[1:10:01] Still working on:
+[1:10:01]   src
+
+[1:10:11] Still working on:
+[1:10:11]   src
+
+[1:10:21] Still working on:
+[1:10:21]   src
+
+[1:10:31] Still working on:
+[1:10:31]   src
+
+[1:10:41] Still working on:
+[1:10:41]   src
+
+[1:10:51] Still working on:
+[1:10:51]   src
+
+[1:11:01] Still working on:
+[1:11:01]   src
+
+[1:11:11] Still working on:
+[1:11:11]   src
+
+[1:11:21] Still working on:
+[1:11:21]   src
+
+[1:11:31] Still working on:
+[1:11:31]   src
+
+[1:11:41] Still working on:
+[1:11:41]   src
+
+[1:11:51] Still working on:
+[1:11:51]   src
+
+[1:12:01] Still working on:
+[1:12:01]   src
+
+[1:12:11] Still working on:
+[1:12:11]   src
+
+[1:12:21] Still working on:
+[1:12:21]   src
+
+[1:12:31] Still working on:
+[1:12:31]   src
+
+[1:12:41] Still working on:
+[1:12:41]   src
+
+[1:12:51] Still working on:
+[1:12:51]   src
+
+[1:13:01] Still working on:
+[1:13:01]   src
+
+[1:13:11] Still working on:
+[1:13:11]   src
+
+[1:13:21] Still working on:
+[1:13:21]   src
+
+[1:13:31] Still working on:
+[1:13:31]   src
+
+[1:13:41] Still working on:
+[1:13:41]   src
+
+[1:13:51] Still working on:
+[1:13:51]   src
+
+[1:14:01] Still working on:
+[1:14:01]   src
+
+[1:14:11] Still working on:
+[1:14:11]   src
+
+[1:14:21] Still working on:
+[1:14:21]   src
+
+[1:14:31] Still working on:
+[1:14:31]   src
+
+[1:14:41] Still working on:
+[1:14:41]   src
+
+[1:14:51] Still working on:
+[1:14:51]   src
+
+[1:15:01] Still working on:
+[1:15:01]   src
+
+[1:15:11] Still working on:
+[1:15:11]   src
+
+[1:15:21] Still working on:
+[1:15:21]   src
+
+[1:15:31] Still working on:
+[1:15:31]   src
+
+[1:15:41] Still working on:
+[1:15:41]   src
+
+[1:15:51] Still working on:
+[1:15:51]   src
+
+[1:16:01] Still working on:
+[1:16:01]   src
+
+[1:16:11] Still working on:
+[1:16:11]   src
+
+[1:16:21] Still working on:
+[1:16:21]   src
+
+[1:16:31] Still working on:
+[1:16:31]   src
+
+[1:16:41] Still working on:
+[1:16:41]   src
+
+[1:16:51] Still working on:
+[1:16:51]   src
+
+[1:17:01] Still working on:
+[1:17:01]   src
+
+[1:17:11] Still working on:
+[1:17:11]   src
+
+[1:17:21] Still working on:
+[1:17:21]   src
+
+[1:17:31] Still working on:
+[1:17:31]   src
+
+[1:17:41] Still working on:
+[1:17:41]   src
+
+[1:17:51] Still working on:
+[1:17:51]   src
+
+[1:18:01] Still working on:
+[1:18:01]   src
+
+[1:18:11] Still working on:
+[1:18:11]   src
+
+[1:18:21] Still working on:
+[1:18:21]   src
+
+[1:18:31] Still working on:
+[1:18:31]   src
+
+[1:18:41] Still working on:
+[1:18:41]   src
+
+[1:18:51] Still working on:
+[1:18:51]   src
+
+[1:19:01] Still working on:
+[1:19:01]   src
+
+[1:19:11] Still working on:
+[1:19:11]   src
+
+[1:19:21] Still working on:
+[1:19:21]   src
+
+[1:19:31] Still working on:
+[1:19:31]   src
+
+[1:19:41] Still working on:
+[1:19:41]   src
+
+[1:19:51] Still working on:
+[1:19:51]   src
+
+[1:20:01] Still working on:
+[1:20:01]   src
+
+[1:20:11] Still working on:
+[1:20:11]   src
+
+[1:20:21] Still working on:
+[1:20:21]   src
+
+[1:20:31] Still working on:
+[1:20:31]   src
+
+[1:20:41] Still working on:
+[1:20:41]   src
+
+[1:20:51] Still working on:
+[1:20:51]   src
+
+[1:21:01] Still working on:
+[1:21:01]   src
+
+[1:21:11] Still working on:
+[1:21:11]   src
+
+[1:21:21] Still working on:
+[1:21:21]   src
+
+[1:21:31] Still working on:
+[1:21:31]   src
+
+[1:21:41] Still working on:
+[1:21:41]   src
+
+[1:21:51] Still working on:
+[1:21:51]   src
+
+[1:22:01] Still working on:
+[1:22:01]   src
+
+[1:22:11] Still working on:
+[1:22:11]   src
+
+[1:22:21] Still working on:
+[1:22:21]   src
+
+[1:22:31] Still working on:
+[1:22:31]   src
+
+[1:22:41] Still working on:
+[1:22:41]   src
+
+[1:22:51] Still working on:
+[1:22:51]   src
+
+[1:23:01] Still working on:
+[1:23:01]   src
+
+[1:23:11] Still working on:
+[1:23:11]   src
+
+[1:23:21] Still working on:
+[1:23:21]   src
+
+[1:23:31] Still working on:
+[1:23:31]   src
+
+[1:23:41] Still working on:
+[1:23:41]   src
+
+[1:23:51] Still working on:
+[1:23:51]   src
+
+[1:24:01] Still working on:
+[1:24:01]   src
+
+[1:24:11] Still working on:
+[1:24:11]   src
+
+[1:24:21] Still working on:
+[1:24:21]   src
+
+[1:24:31] Still working on:
+[1:24:31]   src
+gclient sync --with_branch_heads --with_tags
+[1:24:41] Still working on:
+[1:24:41]   src
+
+[1:24:51] Still working on:
+[1:24:51]   src
+
+[1:25:01] Still working on:
+[1:25:01]   src
+
+[1:25:11] Still working on:
+[1:25:11]   src
+
+[1:25:21] Still working on:
+[1:25:21]   src
+
+[1:25:31] Still working on:
+[1:25:31]   src
+
+[1:25:41] Still working on:
+[1:25:41]   src
+
+[1:25:51] Still working on:
+[1:25:51]   src
+
+[1:26:01] Still working on:
+[1:26:01]   src
+
+[1:26:11] Still working on:
+[1:26:11]   src
+
+[1:26:21] Still working on:
+[1:26:21]   src
+
+[1:26:31] Still working on:
+[1:26:31]   src
+
+[1:26:41] Still working on:
+[1:26:41]   src
+
+[1:26:51] Still working on:
+[1:26:51]   src
+
+[1:27:01] Still working on:
+[1:27:01]   src
+
+[1:27:11] Still working on:
+[1:27:11]   src
+
+[1:27:21] Still working on:
+[1:27:21]   src
+
+[1:27:31] Still working on:
+[1:27:31]   src
+
+[1:27:41] Still working on:
+[1:27:41]   src
+
+[1:27:51] Still working on:
+[1:27:51]   src
+
+[1:28:01] Still working on:
+[1:28:01]   src
+
+[1:28:11] Still working on:
+[1:28:11]   src
+
+[1:28:21] Still working on:
+[1:28:21]   src
+
+[1:28:31] Still working on:
+[1:28:31]   src
+
+[1:28:41] Still working on:
+[1:28:41]   src
+
+[1:28:51] Still working on:
+[1:28:51]   src
+
+[1:29:01] Still working on:
+[1:29:01]   src
+
+[1:29:11] Still working on:
+[1:29:11]   src
+Syncing projects:   1% ( 1/51)
+[1:29:17] Still working on:
+[1:29:17]   src
+Syncing projects:   4% ( 4/88) src/chrome/browser/resources/media_router/extensiSyncing projects:   5% ( 5/88) src/buildtools/third_party/libunwind/trunk       Syncing projects:  78% (75/96) src/tools/luci-go:infra/tools/luci/isolate/${platSyncing projects:  79% (76/96) src/tools/luci-go:infra/tools/luci/isolated/${plaSyncing projects:  80% (77/96) src/tools/luci-go:infra/tools/luci/swarming/${plaSyncing projects:  81% (78/96) src/third_party/webgl/src                        Syncing projects:  82% (79/96) src/tools/skia_goldctl:skia/tools/goldctl/${platfSyncing projects:  83% (80/96) src/tools/page_cycler/acid3                      Syncing projects:  88% (85/96) src/third_party/angle/third_party/vulkan-headers/Syncing projects:  89% (86/96) src/third_party/angle/third_party/rapidjson/src  Syncing projects:  95% (92/96) src/third_party/angle/third_party/vulkan-validation-layers/src
+[1:42:42] Still working on:
+[1:42:42]   src/third_party/electron_node
+[1:42:42]   src/third_party/skia
+[1:42:42]   src/v8
+[1:42:42]   src/third_party/angle/third_party/deqp/src
+
+[1:42:52] Still working on:
+[1:42:52]   src/third_party/electron_node
+[1:42:52]   src/third_party/skia
+[1:42:52]   src/v8
+[1:42:52]   src/third_party/angle/third_party/deqp/src
+
+[1:43:02] Still working on:
+[1:43:02]   src/third_party/electron_node
+[1:43:02]   src/third_party/skia
+[1:43:02]   src/v8
+[1:43:02]   src/third_party/angle/third_party/deqp/src
+
+[1:43:12] Still working on:
+[1:43:12]   src/third_party/electron_node
+[1:43:12]   src/third_party/skia
+[1:43:12]   src/v8
+[1:43:12]   src/third_party/angle/third_party/deqp/src
+
+[1:43:22] Still working on:
+[1:43:22]   src/third_party/electron_node
+[1:43:22]   src/third_party/skia
+[1:43:22]   src/v8
+[1:43:22]   src/third_party/angle/third_party/deqp/src
+
+[1:43:25] Still working on:
+[1:43:25]   src/third_party/electron_node
+[1:43:25]   src/third_party/skia
+[1:43:25]   src/v8
+[1:43:25]   src/third_party/angle/third_party/deqp/src
+Syncing projects:  97% (94/96) src/third_party/skia
+[1:44:32] Still working on:
+[1:44:32]   src/third_party/electron_node
+[1:44:32]   src/v8
+
+[1:44:42] Still working on:
+[1:44:42]   src/third_party/electron_node
+[1:44:42]   src/v8
+
+[1:44:52] Still working on:
+[1:44:52]   src/third_party/electron_node
+[1:44:52]   src/v8
+
+[1:44:55] Still working on:
+[1:44:55]   src/third_party/electron_node
+[1:44:55]   src/v8
+Syncing projects:  98% (95/96) src/v8
+[1:45:55] Still working on:
+[1:45:55]   src/third_party/electron_node
+
+[1:46:05] Still working on:
+[1:46:05]   src/third_party/electron_node
+
+[1:46:15] Still working on:
+[1:46:15]   src/third_party/electron_node
+
+[1:46:25] Still working on:
+[1:46:25]   src/third_party/electron_node
+
+[1:46:35] Still working on:
+[1:46:35]   src/third_party/electron_node
+
+[1:46:45] Still working on:
+[1:46:45]   src/third_party/electron_node
+
+[1:46:55] Still working on:
+[1:46:55]   src/third_party/electron_node
+
+[1:47:05] Still working on:
+[1:47:05]   src/third_party/electron_node
+
+[1:47:15] Still working on:
+[1:47:15]   src/third_party/electron_node
+
+[1:47:25] Still working on:
+[1:47:25]   src/third_party/electron_node
+
+[1:47:35] Still working on:
+[1:47:35]   src/third_party/electron_node
+
+[1:47:45] Still working on:
+[1:47:45]   src/third_party/electron_node
+
+[1:47:55] Still working on:
+[1:47:55]   src/third_party/electron_node
+
+[1:48:05] Still working on:
+[1:48:05]   src/third_party/electron_node
+
+[1:48:15] Still working on:
+[1:48:15]   src/third_party/electron_node
+
+[1:48:25] Still working on:
+[1:48:25]   src/third_party/electron_node
+
+[1:48:35] Still working on:
+[1:48:35]   src/third_party/electron_node
+
+[1:48:45] Still working on:
+[1:48:45]   src/third_party/electron_node
+
+[1:48:55] Still working on:
+[1:48:55]   src/third_party/electron_node
+
+[1:49:05] Still working on:
+[1:49:05]   src/third_party/electron_node
+
+[1:49:15] Still working on:
+[1:49:15]   src/third_party/electron_node
+
+[1:49:25] Still working on:
+[1:49:25]   src/third_party/electron_node
+
+[1:49:35] Still working on:
+[1:49:35]   src/third_party/electron_node
+
+[1:49:45] Still working on:
+[1:49:45]   src/third_party/electron_node
+
+[1:49:55] Still working on:
+[1:49:55]   src/third_party/electron_node
+
+[1:50:05] Still working on:
+[1:50:05]   src/third_party/electron_node
+
+[1:50:15] Still working on:
+[1:50:15]   src/third_party/electron_node
+
+[1:50:25] Still working on:
+[1:50:25]   src/third_party/electron_node
+
+[1:50:35] Still working on:
+[1:50:35]   src/third_party/electron_node
+
+[1:50:45] Still working on:
+[1:50:45]   src/third_party/electron_node
+
+[1:50:55] Still working on:
+[1:50:55]   src/third_party/electron_node
+
+[1:51:05] Still working on:
+[1:51:05]   src/third_party/electron_node
+
+[1:51:15] Still working on:
+[1:51:15]   src/third_party/electron_node
+
+[1:51:25] Still working on:
+[1:51:25]   src/third_party/electron_node
+
+[1:51:35] Still working on:
+[1:51:35]   src/third_party/electron_node
+
+[1:51:45] Still working on:
+[1:51:45]   src/third_party/electron_node
+
+[1:51:55] Still working on:
+[1:51:55]   src/third_party/electron_node
+
+[1:52:05] Still working on:
+[1:52:05]   src/third_party/electron_node
+
+[1:52:15] Still working on:
+[1:52:15]   src/third_party/electron_node
+
+[1:52:25] Still working on:
+[1:52:25]   src/third_party/electron_node
+
+[1:52:35] Still working on:
+[1:52:35]   src/third_party/electron_node
+
+[1:52:45] Still working on:
+[1:52:45]   src/third_party/electron_node
+
+[1:52:55] Still working on:
+[1:52:55]   src/third_party/electron_node
+
+[1:53:05] Still working on:
+[1:53:05]   src/third_party/electron_node
+
+[1:53:15] Still working on:
+[1:53:15]   src/third_party/electron_node
+
+[1:53:25] Still working on:
+[1:53:25]   src/third_party/electron_node
+
+[1:53:35] Still working on:
+[1:53:35]   src/third_party/electron_node
+
+[1:53:45] Still working on:
+[1:53:45]   src/third_party/electron_node
+
+[1:53:55] Still working on:
+[1:53:55]   src/third_party/electron_node
+
+[1:54:05] Still working on:
+[1:54:05]   src/third_party/electron_node
+
+[1:54:15] Still working on:
+[1:54:15]   src/third_party/electron_node
+
+[1:54:25] Still working on:
+[1:54:25]   src/third_party/electron_node
+
+[1:54:35] Still working on:
+[1:54:35]   src/third_party/electron_node
+
+[1:54:40] Still working on:
+[1:54:40]   src/third_party/electron_node
+Syncing projects: 100% (96/96), done.
+
+________ running 'C:\Python27\python.exe src/electron/script/apply_all_patches.py src/electron/patches/common/config.json' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+Applying: build_gn.patch
+Applying: expose ripemd160
+Applying: expose aes-{128,256}-cfb
+Applying: handle pub_key == null in EC_KEY_set_public_key
+Applying: deps: backport detailed line info for CPU profiler
+Applying: add_realloc.patch
+Applying: build_gn.patch
+Applying: expose_mksnapshot.patch
+Applying: build-torque-with-x64-toolchain-on-arm.patch
+Applying: Do not run arm/arm64 mksnapshot binaries
+Applying: deps: provide more V8 backwards compatibility
+Applying: dcheck.patch
+Applying: add_realloc.patch
+Applying: build_gn.patch
+Applying: dcheck.patch
+Applying: accelerator.patch
+Applying: blink_file_path.patch
+Applying: blink_local_frame.patch
+Applying: blink_world_context.patch
+Applying: browser_compositor_mac.patch
+Applying: can_create_window.patch
+Applying: compositor_delegate.patch
+Applying: disable_hidden.patch
+Applying: dom_storage_limits.patch
+Applying: frame_host_manager.patch
+Applying: out_of_process_instance.patch
+Applying: render_widget_host_view_base.patch
+Applying: render_widget_host_view_mac.patch
+Applying: stream_resource_handler.patch
+Applying: thread_capabilities.patch
+Applying: web_contents.patch
+Applying: webgl_context_attributes.patch
+Applying: webview_cross_drag.patch
+Applying: worker_context_will_destroy.patch
+Applying: disable_user_gesture_requirement_for_beforeunload_dialogs.patch
+Applying: gin_enable_disable_v8_platform.patch
+Applying: blink-worker-enable-csp-in-file-scheme.patch
+Applying: disable-redraw-lock.patch
+Applying: v8_context_snapshot_generator.patch
+Applying: boringssl BUILD.gn
+Applying: pepper_flash.patch
+Applying: no_cache_storage_check.patch
+Applying: blink_fix_prototype_assert.patch
+Applying: libgtkui_export.patch
+Applying: gtk_visibility.patch
+Applying: sysroot.patch
+Applying: mas_blink_no_private_api.patch
+Applying: mas_no_private_api.patch
+Applying: resource_file_conflict.patch
+Applying: scroll_bounce_flag.patch
+Applying: mas-cfisobjc.patch
+Applying: mas-cgdisplayusesforcetogray.patch
+Applying: mas-audiodeviceduck.patch
+Applying: mas-lssetapplicationlaunchservicesserverconnectionstatus.patch
+Applying: allow_webview_file_url.patch
+Applying: ignore_rc_check.patch
+Applying: enable_widevine.patch
+Applying: chrome_key_systems.patch
+Applying: allow_nested_error_trackers.patch
+Applying: blink_initialization_order.patch
+Applying: disable_detach_webview_frame.patch
+Applying: ssl_security_state_tab_helper.patch
+Applying: exclude-a-few-test-files-from-build.patch
+Applying: expose-net-observer-api.patch
+Applying: desktop_media_list.patch
+Applying: proxy_config_monitor.patch
+Applying: gritsettings_resource_ids.patch
+Applying: isolate_holder.patch
+Applying: pass RenderProcessHost through to PlatformNotificationService
+Applying: content_browser_main_loop.patch
+Applying: dump_syms.patch
+Applying: define Command::IsMediaKey on mac
+Applying: tts.patch
+Applying: printing.patch
+Applying: verbose_generate_breakpad_symbols.patch
+Applying: cross_site_document_resource_handler.patch
+Applying: content: allow embedder to prevent locking scheme registry
+Applying: support mixed-sandbox with zygote
+Applying: Add --disable-color-correct-rendering switch
+Applying: disable_time_ticks_dcheck.patch
+Applying: don't call into chrome internals for autofill popup size calculations
+Applying: Revert "Build swiftshader for ARM32."
+Applying: fix: disable usage of abort_report_np in MAS builds
+Applying: fix: disable usage of pthread_fchdir_np and pthread_chdir_np in MAS builds
+Applying: fix: disable usage of SetApplicationIsDaemon and _LSSetApplicationLaunchServicesServerConnectionStatus in MAS builds
+Hook ''C:\Python27\python.exe' src/electron/script/apply_all_patches.py src/electron/patches/common/config.json' took 40.52 secs
+Running hooks:   2% ( 2/81) electron_external_binaries
+________ running 'C:\Python27\python.exe src/electron/script/update-external-binaries.py' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+Downloading http://github.com/electron/electron-frameworks/releases/download/v1.4.0/directxsdk-x64.zip to c:\users\maomao\appdata\local\temp\electron-ofn1hr\directxsdk-x64.zip
+Download directxsdk-x64.zip     1806291  [100.0%]
+Downloading http://github.com/electron/electron-frameworks/releases/download/v1.4.0/sccache-win32-x64.zip to c:\users\maomao\appdata\local\temp\electron-a8hmzq\sccache-win32-x64.zip
+Download sccache-win32-x64.zip     2408844  [100.0%]
+Hook ''C:\Python27\python.exe' src/electron/script/update-external-binaries.py' took 35.86 secs
+Running hooks:   3% ( 3/81) electron_npm_deps
+________ running 'C:\Python27\python.exe -c import os, subprocess; os.chdir(os.path.join("src", "electron")); subprocess.check_call(["python", "script/lib/npm.py", "install"]);' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+
+> electron@6.0.0-nightly.20190311 preinstall D:\Program Files\Git\workspace\fork\electron-gn\src\electron
+> node -e 'process.exit(0)'
+
+
+> husky@0.14.3 install D:\Program Files\Git\workspace\fork\electron-gn\src\electron\node_modules\husky
+> node ./bin/install.js
+
+husky
+setting up Git hooks
+done
+
+
+> dugite@1.63.0 postinstall D:\Program Files\Git\workspace\fork\electron-gn\src\electron\node_modules\dugite
+> node ./script/download-git.js
+
+npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.4 (node_modules\fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
+
+added 1406 packages from 688 contributors and audited 7646 packages in 17.808s
+found 30 vulnerabilities (2 low, 23 moderate, 5 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+Hook ''C:\Python27\python.exe' -c 'import os, subprocess; os.chdir(os.path.join("src", "electron")); subprocess.check_call(["python", "script/lib/npm.py", "install"]);'' took 19.65 secs
+Running hooks:  24% (20/81) clang
+________ running 'C:\Python27\python.exe src/tools/clang/scripts/update.py --with-android=False' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+Downloading https://commondatastorage.googleapis.com/chromium-browser-clang/Win/clang-354873-1.tgz .......... Done.
+Copying D:\Program Files (x86)\Microsoft Visual Studio\2017\Community\DIA SDK\bin\amd64\msdia140.dll to D:\Program Files\Git\workspace\fork\electron-gn\src\third_party\llvm-build\Release+Asserts\bin
+Hook ''C:\Python27\python.exe' src/tools/clang/scripts/update.py --with-android=False' took 70.66 secs
+Running hooks:  32% (26/81) gn_win
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-gn -s src/buildtools/win/gn.exe.sha1' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/buildtools/win/gn.exe...
+Downloading 1 files took 263.246000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-gn -s src/buildtools/win/gn.exe.sha1' took 263.35 secs
+Running hooks:  35% (29/81) clang_format_win
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-clang-format -s src/buildtools/win/clang-format.exe.sha1' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/buildtools/win/clang-format.exe...
+Downloading 1 files took 12.835000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-clang-format -s src/buildtools/win/clang-format.exe.sha1' took 12.91 secs
+Running hooks:  39% (32/81) rc_win
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-browser-clang/rc -s src/build/toolchain/win/rc/win/rc.exe.sha1' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/build/toolchain/win/rc/win/rc.exe...
+Downloading 1 files took 12.543000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-browser-clang/rc -s src/build/toolchain/win/rc/win/rc.exe.sha1' took 12.62 secs
+Running hooks:  43% (35/81) test_fonts
+________ running 'download_from_google_storage --no_resume --extract --no_auth --bucket chromium-fonts -s src/third_party/test_fonts/test_fonts.tar.gz.sha1' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/third_party/test_fonts/test_fonts.tar.gz...
+0> Extracting 30 entries from src/third_party/test_fonts/test_fonts.tar.gz to src/third_party/test_fonts/test_fonts
+Downloading 1 files took 44.778000 second(s)
+Hook 'download_from_google_storage --no_resume --extract --no_auth --bucket chromium-fonts -s src/third_party/test_fonts/test_fonts.tar.gz.sha1' took 44.88 secs
+Running hooks:  44% (36/81) orderfiles_win
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-browser-clang/orderfiles -d src/chrome/build' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/chrome/build\chrome.x64.orderfile...
+0> Downloading src/chrome/build\chrome.x86.orderfile...
+0> Downloading src/chrome/build\chrome_child.x64.orderfile...
+0> Downloading src/chrome/build\chrome_child.x86.orderfile...
+Downloading 4 files took 56.115000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-browser-clang/orderfiles -d src/chrome/build' took 58.51 secs
+Running hooks:  45% (37/81) apache_win32
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --directory --recursive --no_auth --num_threads=16 --bucket chromium-apache-win32 src/third_party/apache-win32' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+4> Downloading src/third_party/apache-win32\bin\api-ms-win-core-errorhandling-l1-1-0.dll...
+8> Downloading src/third_party/apache-win32\bin\api-ms-win-core-handle-l1-1-0.dll...
+2> Downloading src/third_party/apache-win32\bin\api-ms-win-core-datetime-l1-1-0.dll...
+9> Downloading src/third_party/apache-win32\bin\api-ms-win-core-heap-l1-1-0.dll...
+13> Downloading src/third_party/apache-win32\bin\api-ms-win-core-memory-l1-1-0.dll...
+3> Downloading src/third_party/apache-win32\bin\api-ms-win-core-debug-l1-1-0.dll...
+5> Downloading src/third_party/apache-win32\bin\api-ms-win-core-file-l1-1-0.dll...
+6> Downloading src/third_party/apache-win32\bin\api-ms-win-core-file-l1-2-0.dll...
+12> Downloading src/third_party/apache-win32\bin\api-ms-win-core-localization-l1-2-0.dll...
+1> Downloading src/third_party/apache-win32\bin\api-ms-win-core-console-l1-1-0.dll...
+7> Downloading src/third_party/apache-win32\bin\api-ms-win-core-file-l2-1-0.dll...
+11> Downloading src/third_party/apache-win32\bin\api-ms-win-core-libraryloader-l1-1-0.dll...
+15> Downloading src/third_party/apache-win32\bin\api-ms-win-core-processenvironment-l1-1-0.dll...
+14> Downloading src/third_party/apache-win32\bin\api-ms-win-core-namedpipe-l1-1-0.dll...
+10> Downloading src/third_party/apache-win32\bin\api-ms-win-core-interlocked-l1-1-0.dll...
+0> Downloading src/third_party/apache-win32\bin\ApacheMonitor.exe...
+3> Downloading src/third_party/apache-win32\bin\api-ms-win-core-rtlsupport-l1-1-0.dll...
+2> Downloading src/third_party/apache-win32\bin\api-ms-win-core-processthreads-l1-1-0.dll...
+5> Downloading src/third_party/apache-win32\bin\api-ms-win-core-synch-l1-2-0.dll...
+13> Downloading src/third_party/apache-win32\bin\api-ms-win-core-string-l1-1-0.dll...
+8> Downloading src/third_party/apache-win32\bin\api-ms-win-core-processthreads-l1-1-1.dll...
+4> Downloading src/third_party/apache-win32\bin\api-ms-win-core-synch-l1-1-0.dll...
+9> Downloading src/third_party/apache-win32\bin\api-ms-win-core-profile-l1-1-0.dll...
+7> Downloading src/third_party/apache-win32\bin\api-ms-win-core-sysinfo-l1-1-0.dll...
+6> Downloading src/third_party/apache-win32\bin\api-ms-win-core-timezone-l1-1-0.dll...
+11> Downloading src/third_party/apache-win32\bin\api-ms-win-core-util-l1-1-0.dll...
+0> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-convert-l1-1-0.dll...
+1> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-locale-l1-1-0.dll...
+12> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-environment-l1-1-0.dll...
+14> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-heap-l1-1-0.dll...
+15> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-filesystem-l1-1-0.dll...
+10> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-conio-l1-1-0.dll...
+13> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-math-l1-1-0.dll...
+8> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-multibyte-l1-1-0.dll...
+4> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-process-l1-1-0.dll...
+5> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-private-l1-1-0.dll...
+2> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-runtime-l1-1-0.dll...
+9> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-stdio-l1-1-0.dll...
+3> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-string-l1-1-0.dll...
+7> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-time-l1-1-0.dll...
+1> Downloading src/third_party/apache-win32\bin\libapriconv-1.dll...
+14> Downloading src/third_party/apache-win32\bin\httpd.exe...
+12> Downloading src/third_party/apache-win32\bin\libcrypto-1_1-x64.dll...
+15> Downloading src/third_party/apache-win32\bin\libssl-1_1-x64.dll...
+0> Downloading src/third_party/apache-win32\bin\libaprutil-1.dll...
+11> Downloading src/third_party/apache-win32\bin\api-ms-win-crt-utility-l1-1-0.dll...
+6> Downloading src/third_party/apache-win32\bin\libapr-1.dll...
+10> Downloading src/third_party/apache-win32\bin\libhttpd.dll...
+9> Downloading src/third_party/apache-win32\bin\php7ts.dll...
+5> Downloading src/third_party/apache-win32\bin\zlib1.dll...
+3> Downloading src/third_party/apache-win32\bin\ucrtbase.dll...
+4> Downloading src/third_party/apache-win32\bin\openssl.exe...
+2> Downloading src/third_party/apache-win32\bin\pcre.dll...
+8> Downloading src/third_party/apache-win32\bin\vcruntime140.dll...
+13> Downloading src/third_party/apache-win32\modules\mod_access_compat.so...
+7> Downloading src/third_party/apache-win32\modules\mod_alias.so...
+1> Downloading src/third_party/apache-win32\modules\mod_asis.so...
+0> Downloading src/third_party/apache-win32\modules\mod_authz_core.so...
+11> Downloading src/third_party/apache-win32\modules\mod_authn_core.so...
+6> Downloading src/third_party/apache-win32\modules\mod_autoindex.so...
+14> Downloading src/third_party/apache-win32\modules\mod_authz_host.so...
+12> Downloading src/third_party/apache-win32\modules\mod_headers.so...
+15> Downloading src/third_party/apache-win32\modules\mod_env.so...
+10> Downloading src/third_party/apache-win32\modules\mod_cgi.so...
+13> Downloading src/third_party/apache-win32\modules\mod_log_config.so...
+5> Downloading src/third_party/apache-win32\modules\mod_mime.so...
+7> Downloading src/third_party/apache-win32\modules\mod_rewrite.so...
+4> Downloading src/third_party/apache-win32\modules\php7apache2_4.dll...
+2> Downloading src/third_party/apache-win32\modules\mod_ssl.so...
+Downloading 69 files took 90.515000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --directory --recursive --no_auth --num_threads=16 --bucket chromium-apache-win32 src/third_party/apache-win32' took 93.49 secs
+Running hooks:  49% (40/81) wasm_fuzzer
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth -u --bucket v8-wasm-fuzzer -s src/v8/test/fuzzer/wasm_corpus.tar.gz.sha1' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/v8/test/fuzzer/wasm_corpus.tar.gz...
+0> Extracting 15291 entries from src/v8/test/fuzzer/wasm_corpus.tar.gz to src/v8/test/fuzzer/wasm_corpus
+Downloading 1 files took 48.635000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth -u --bucket v8-wasm-fuzzer -s src/v8/test/fuzzer/wasm_corpus.tar.gz.sha1' took 48.72 secs
+Running hooks:  53% (43/81) node_win
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-nodejs/8.9.1 -s src/third_party/node/win/node.exe.sha1' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/third_party/node/win/node.exe...
+Downloading 1 files took 35.727000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --bucket chromium-nodejs/8.9.1 -s src/third_party/node/win/node.exe.sha1' took 35.80 secs
+Running hooks:  54% (44/81) webui_node_modules
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --extract --no_auth --bucket chromium-nodejs -s src/third_party/node/node_modules.tar.gz.sha1' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/third_party/node/node_modules.tar.gz...
+0> Extracting 5458 entries from src/third_party/node/node_modules.tar.gz to src/third_party/node/node_modules
+Downloading 1 files took 32.260000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --extract --no_auth --bucket chromium-nodejs -s src/third_party/node/node_modules.tar.gz.sha1' took 32.34 secs
+Running hooks:  59% (48/81) tools_traffic_annotation_windows
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --num_threads=4 --bucket chromium-tools-traffic_annotation -d src/tools/traffic_annotation/bin/win32' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+0> Downloading src/tools/traffic_annotation/bin/win32\traffic_annotation_extractor.exe...
+1> Downloading src/tools/traffic_annotation/bin/win32\traffic_annotation_auditor.exe...
+Downloading 2 files took 41.283000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --num_threads=4 --bucket chromium-tools-traffic_annotation -d src/tools/traffic_annotation/bin/win32' took 43.16 secs
+Running hooks:  60% (49/81) zucchini_testdata
+________ running 'C:\Python27\python.exe src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --num_threads=4 --bucket chromium-binary-patching/zucchini_testdata --recursive -d src/components/zucchini' in 'D:\Program Files\Git\workspace\fork\electron-gn'
+1> Downloading src/components/zucchini\fuzzers\testdata\old_eventlog_provider.dll...
+0> Downloading src/components/zucchini\fuzzers\testdata\new_eventlog_provider.dll...
+3> Downloading src/components/zucchini\testdata\chrome64_2.exe...
+2> Downloading src/components/zucchini\testdata\chrome64_1.exe...
+1> Downloading src/components/zucchini\testdata\setup1.exe...
+0> Downloading src/components/zucchini\testdata\setup2.exe...
+Downloading 6 files took 23.851000 second(s)
+Hook ''C:\Python27\python.exe' src/third_party/depot_tools/download_from_google_storage.py --no_resume --no_auth --num_threads=4 --bucket chromium-binary-patching/zucchini_testdata --recursive -d src/components/zucchini' took 26.24 secs
+Running hooks: 100% (81/81), done.
+
