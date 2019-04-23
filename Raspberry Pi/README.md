@@ -13,3 +13,7 @@
 ### [Sense Hat](./SenseHat.md)
 
 引脚 - [https://pinout.xyz/pinout/sense_hat#](https://pinout.xyz/pinout/sense_hat#)
+
+### 串口（Serial）
+
+[https://pyserial.readthedocs.io/en/latest/pyserial.html](https://pyserial.readthedocs.io/en/latest/pyserial.html)
