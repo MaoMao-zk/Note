@@ -4,22 +4,157 @@
 
 [TOC]
 
+Note: See [Threading and Tasks FAQ](threading_and_tasks_faq.md) for more
+examples.
+
 ## Overview
 
-Chromium中广泛使用了多线程。 因为我们致力于保持UI响应迅速，这意味着I/O操作和其他耗时的操作不应该阻塞UI线程。 我们不推荐使用锁或者线程安全的对象。 我们的方式是通过传递消息来达到线程之间的通信： 对象只存在于一个线程上，线程之间的通信使用消息传递，而且我们对于大多数跨线程请求使用回调接口（通过消息传递实现）。
+Chrome has a [multi-process
+architecture](https://www.chromium.org/developers/design-documents/multi-process-architecture)
+and each process is heavily multi-threaded. In this document we will go over the
+basic threading system shared by each process. The main goal is to keep the main
+thread (a.k.a. "UI" thread in the browser process) and IO thread (each process'
+thread for handling
+[IPC](https://en.wikipedia.org/wiki/Inter-process_communication)) responsive.
+This means offloading any blocking I/O or other expensive operations to other
+threads. Our approach is to use message passing as the way of communicating
+between threads. We discourage locking and thread-safe objects. Instead, objects
+live on only one (often virtual -- we'll get to that later!) thread and we pass
+messages between those threads for communication.
+
+## 概览
+
+Chrome是[多进程架构](https://www.chromium.org/developers/design-documents/multi-process-architecture)的，
+每个进程又有非常多的线程。 文本将介绍进程中的基本线程系统。 它的主要目的是保持主线程
+和IO线程的响应。我们的方法是使用消息传递作为线程之间的通信方式。 我们不鼓励加锁或者
+使用线程安全的对象。 而是让一个对象只存在于一个线程中，然后这些线程通过传递消息来通信。
+
+
+This documentation assumes familiarity with computer science
+[threading concepts](https://en.wikipedia.org/wiki/Thread_(computing)).
+
+### 命名/Nomenclature
+
+## Core Concepts
+ * **Task**: A unit of work to be processed. Effectively a function pointer with
+   optionally associated state. In Chrome this is `base::Callback` created via
+   `base::Bind`
+   ([documentation](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/callback.md)).
+ * **Task queue**: A queue of tasks to be processed.
+ * **Physical thread**: An operating system provided thread (e.g. pthread on
+   POSIX or CreateThread() on Windows). The Chrome cross-platform abstraction
+   is `base::PlatformThread`. You should pretty much never use this directly.
+ * **`base::Thread`**: A physical thread forever processing messages from a
+   dedicated task queue until Quit(). You should pretty much never be creating
+   your own `base::Thread`'s.
+ * **Thread pool**: A pool of physical threads with a shared task queue. In
+   Chrome, this is `base::ThreadPool`. There's exactly one instance per Chrome
+   process, it serves tasks posted through
+   [`base/task/post_task.h`](https://cs.chromium.org/chromium/src/base/task/post_task.h)
+   and as such you should rarely need to use the `base::ThreadPool` API
+   directly (more on posting tasks later).
+ * **Sequence** or **Virtual thread**: A chrome-managed thread of execution.
+   Like a physical thread, only one task can run on a given sequence / virtual
+   thread at any given moment and each task sees the side-effects of the
+   preceding tasks. Tasks are executed sequentially but may hop physical
+   threads between each one.
+ * **Task runner**: An interface through which tasks can be posted. In Chrome
+   this is `base::TaskRunner`.
+ * **Sequenced task runner**: A task runner which guarantees that tasks posted
+   to it will run sequentially, in posted order. Each such task is guaranteed to
+   see the side-effects of the task preceding it. Tasks posted to a sequenced
+   task runner are typically processed by a single thread (virtual or physical).
+   In Chrome this is `base::SequencedTaskRunner` which is-a
+   `base::TaskRunner`.
+ * **Single-thread task runner**: A sequenced task runner which guarantees that
+   all tasks will be processed by the same physical thread. In Chrome this is
+   `base::SingleThreadTaskRunner` which is-a `base::SequencedTaskRunner`. We
+   [prefer sequences to threads](#prefer-sequences-to-physical-threads) whenever
+   possible.
+
+## 核心概念
+ * **Task（任务）**: 待处理的一个工作单元。 一般是一个函数指针附上一些可选的关联状态。
+   在Chrome中他是`base::Callback`，由`base::Bind`创建
+   ([documentation](https://chromium.googlesource.com/chromium/src/+/HEAD/docs/callback.md))。
+ * **Task queue（任务队列）**: 一个待执行任务的队列。
+ * **Physical thread（物理线程）**: 操作系统提供的线程(e.g. pthread on
+   POSIX or CreateThread() on Windows)。 Chrome中有跨平台的抽象——`base::PlatformThread`。
+   最好不要直接使用它。
+ * **`base::Thread`**: 一个物理线程，持续处理专用任务队列的消息，直到调用Quit()。
+   不要创建自己的`base::Thread`.
+ * **Thread pool（线程池）**: 一个物理线程池，他们共用一个任务队列。在Chrome中是`base::ThreadPool`。
+   一个Chrome进程只有一个实例， 它用作处理由[`base/task/post_task.h`](https://cs.chromium.org/chromium/src/base/task/post_task.h)
+   发布的任务， 你很少需要直接使用`base::ThreadPool`的接口（更多的是发布任务）。
+ * **Sequence** or **Virtual thread**: A chrome-managed thread of execution.
+   Like a physical thread, only one task can run on a given sequence / virtual
+   thread at any given moment and each task sees the side-effects of the
+   preceding tasks. Tasks are executed sequentially but may hop physical
+   threads between each one.
+ * **Task runner**: An interface through which tasks can be posted. In Chrome
+   this is `base::TaskRunner`.
+ * **Sequenced task runner**: A task runner which guarantees that tasks posted
+   to it will run sequentially, in posted order. Each such task is guaranteed to
+   see the side-effects of the task preceding it. Tasks posted to a sequenced
+   task runner are typically processed by a single thread (virtual or physical).
+   In Chrome this is `base::SequencedTaskRunner` which is-a
+   `base::TaskRunner`.
+ * **Single-thread task runner**: A sequenced task runner which guarantees that
+   all tasks will be processed by the same physical thread. In Chrome this is
+   `base::SingleThreadTaskRunner` which is-a `base::SequencedTaskRunner`. We
+   [prefer sequences to threads](#prefer-sequences-to-physical-threads) whenever
+   possible.
+
+## Threading Lexicon
+Note to the reader: the following terms are an attempt to bridge the gap between
+common threading nomenclature and the way we use them in Chrome. It might be a
+bit heavy if you're just getting started. Should this be hard to parse, consider
+skipping to the more detailed sections below and referring back to this as
+necessary.
+
+ * **Thread-unsafe**: The vast majority of types in Chrome are thread-unsafe
+   (by design). Access to such types/methods must be externally synchronized.
+   Typically thread-unsafe types require that all tasks accessing their state be
+   posted to the same `base::SequencedTaskRunner` and they verify this in debug
+   builds with a `SEQUENCE_CHECKER` member. Locks are also an option to
+   synchronize access but in Chrome we strongly
+   [prefer sequences to locks](#Using-Sequences-Instead-of-Locks).
+ * **Thread-affine**: Such types/methods need to be always accessed from the
+   same physical thread (i.e. from the same `base::SingleThreadTaskRunner`) and
+   typically have a `THREAD_CHECKER` member to verify that they are. Short of
+   using a third-party API or having a leaf dependency which is thread-affine:
+   there's pretty much no reason for a type to be thread-affine in Chrome.
+   Note that `base::SingleThreadTaskRunner` is-a `base::SequencedTaskRunner` so
+   thread-affine is a subset of thread-unsafe. Thread-affine is also sometimes
+   referred to as **thread-hostile**.
+ * **Thread-safe**: Such types/methods can be safely accessed concurrently.
+ * **Thread-compatible**: Such types provide safe concurrent access to const
+   methods but require synchronization for non-const (or mixed const/non-const
+   access). Chrome doesn't expose reader-writer locks; as such, the only use
+   case for this is objects (typically globals) which are initialized once in a
+   thread-safe manner (either in the single-threaded phase of startup or lazily
+   through a thread-safe static-local-initialization paradigm a la
+   `base::NoDestructor`) and forever after immutable.
+ * **Immutable**: A subset of thread-compatible types which cannot be modified
+   after construction.
+ * **Sequence-friendly**: Such types/methods are thread-unsafe types which
+   support being invoked from a `base::SequencedTaskRunner`. Ideally this would
+   be the case for all thread-unsafe types but legacy code sometimes has
+   overzealous checks that enforce thread-affinity in mere thread-unsafe
+   scenarios. See [Prefer Sequences to
+   Threads](#prefer-sequences-to-physical-threads) below for more details.
 
 ### Threads
 
 每个chrome的进程中有：
 
-* 一个主线程
-   * browser process中: 更新UI
-   * renderer processes中: 运行大部分Blink（TODO：意味着什么）
-* 一个IO线程
-   * browser process中: 处理IPCs和 网络请求
-   * renderer processes中: 处理IPCs
-* 一些特殊用途的线程
-* 以及很多一般用途的线程
+* a main thread
+   * in the browser process (BrowserThread::UI): updates the UI
+   * in renderer processes (Blink main thread): runs most of Blink
+* an IO thread
+   * in the browser process (BrowserThread::IO): handles IPCs and network requests
+   * in renderer processes: handles IPCs
+* a few more special-purpose threads
+* and a pool of general-purpose threads
 
 大多数线程都有一个循环，从队列中拿到任务并执行（整个队列可以被多个线程使用）。
 
@@ -27,7 +162,10 @@ Chromium中广泛使用了多线程。 因为我们致力于保持UI响应迅速
 
 任务的本质是一个`base::OnceClosure`对象，会被添加到队列中异步执行。
 
-使用`base::BindOnce`可以创建一个`base::OnceClosure`对象(ref. [Callback<> and Bind() documentation](https://chromium.googlesource.com/chromium/src/+/master/docs/callback.md))。 `base::OnceClosure`对象中存储着一个函数指针，以及参数。 他有一个`Run()`方法，会使用存储的参数执行这个函数指针。 
+使用`base::BindOnce`可以创建一个`base::OnceClosure`对象(ref. 
+[Callback<> and Bind() documentation](https://chromium.googlesource.com/chromium/src/+/master/docs/callback.md))。 
+`base::OnceClosure`对象中存储着一个函数指针，以及参数。 他有一个`Run()`方法，会使用
+存储的参数执行这个函数指针。 
 
 ```
 void TaskA() {}
@@ -48,34 +186,28 @@ A group of tasks can be executed in one of the following ways:
    * [COM Single Threaded](#Posting-Tasks-to-a-COM-Single-Thread-Apartment-STA_Thread-Windows_):
      A variant of single threaded with COM initialized.
 
-### Prefer Sequences to Threads
+### Prefer Sequences to Physical Threads
 
-**Sequenced execution mode is far preferred to Single Threaded** in scenarios
-that require mere thread-safety as it opens up scheduling paradigms that
-wouldn't be possible otherwise (sequences can hop threads instead of being stuck
-behind unrelated work on a dedicated thread). Ability to hop threads also means
-the thread count can dynamically adapt to the machine's true resource
-availability (increased parallelism on bigger machines, avoids trashing
-resources on smaller machines).
+Sequenced execution (on virtual threads) is strongly preferred to
+single-threaded execution (on physical threads). Except for types/methods bound
+to the main thread (UI) or IO threads: thread-safety is better achieved via
+`base::SequencedTaskRunner` than through managing your own physical threads
+(ref. [Posting a Sequenced Task](#posting-a-sequenced-task) below).
 
-Many core APIs were recently made sequence-friendly (classes are rarely
-thread-affine -- i.e. only when using thread-local-storage or third-party APIs
-that do). But the codebase has long evolved assuming single-threaded contexts...
-If your class could run on a sequence but is blocked by an overzealous use of
-ThreadChecker/ThreadTaskRunnerHandle/SingleThreadTaskRunner in a leaf
-dependency, consider fixing that dependency for everyone's benefit (or at the
-very least file a blocking bug against https://crbug.com/675631 and flag your
-use of base::CreateSingleThreadTaskRunnerWithTraits() with a TODO against your
-bug to use base::CreateSequencedTaskRunnerWithTraits() when fixed).
+All APIs which are exposed for "current physical thread" have an equivalent for
+"current sequence"
+([mapping](threading_and_tasks_faq.md#How-to-migrate-from-SingleThreadTaskRunner-to-SequencedTaskRunner)).
 
-Detailed documentation on how to migrate from single-threaded contexts to
-sequenced contexts can be found [here](threading_and_tasks_faq.md#How-can-I-migrate-from-SingleThreadTaskRunner-to-SequencedTaskRunner_).
-
-The discussion below covers all of these ways to execute tasks in details.
+If you find yourself writing a sequence-friendly type and it fails
+thread-affinity checks (e.g., `THREAD_CHECKER`) in a leaf dependency: consider
+making that dependency sequence-friendly as well. Most core APIs in Chrome are
+sequence-friendly, but some legacy types may still over-zealously use
+ThreadChecker/ThreadTaskRunnerHandle/SingleThreadTaskRunner when they could
+instead rely on the "current sequence" and no longer be thread-affine.
 
 ## Posting a Parallel Task
 
-### Direct Posting to the Task Scheduler
+### Direct Posting to the Thread Pool
 
 A task that can run on any thread and doesn’t have ordering or mutual exclusion
 requirements with other tasks should be posted using one of the
@@ -101,29 +233,23 @@ base::PostTaskWithTraits(
 ### Posting via a TaskRunner
 
 A parallel
-[`TaskRunner`](https://cs.chromium.org/chromium/src/base/task_runner.h) is an
-alternative to calling `base::PostTask*()` directly. This is mainly useful when
-it isn’t known in advance whether tasks will be posted in parallel, in sequence,
-or to a single-thread (ref.
-[Posting a Sequenced Task](#Posting-a-Sequenced-Task),
-[Posting Multiple Tasks to the Same Thread](#Posting-Multiple-Tasks-to-the-Same-Thread)).
-Since `TaskRunner` is the base class of `SequencedTaskRunner` and
-`SingleThreadTaskRunner`, a `scoped_refptr<TaskRunner>` member can hold a
-`TaskRunner`, a `SequencedTaskRunner` or a `SingleThreadTaskRunner`.
+[`base::TaskRunner`](https://cs.chromium.org/chromium/src/base/task_runner.h) is
+an alternative to calling `base::PostTask*()` directly. This is mainly useful
+when it isn’t known in advance whether tasks will be posted in parallel, in
+sequence, or to a single-thread (ref. [Posting a Sequenced
+Task](#Posting-a-Sequenced-Task), [Posting Multiple Tasks to the Same
+Thread](#Posting-Multiple-Tasks-to-the-Same-Thread)). Since `base::TaskRunner`
+is the base class of `base::SequencedTaskRunner` and
+`base::SingleThreadTaskRunner`, a `scoped_refptr<TaskRunner>` member can hold a
+`base::TaskRunner`, a `base::SequencedTaskRunner` or a
+`base::SingleThreadTaskRunner`.
 
 ```cpp
 class A {
  public:
   A() = default;
 
-  void set_task_runner_for_testing(
-      scoped_refptr<base::TaskRunner> task_runner) {
-    task_runner_ = std::move(task_runner);
-  }
-
   void DoSomething() {
-    // In production, A is always posted in parallel. In test, it is posted to
-    // the TaskRunner provided via set_task_runner_for_testing().
     task_runner_->PostTask(FROM_HERE, base::BindOnce(&A));
   }
 
@@ -141,11 +267,11 @@ ways of controlling tasks in tests).
 
 A sequence is a set of tasks that run one at a time in posting order (not
 necessarily on the same thread). To post tasks as part of a sequence, use a
-[`SequencedTaskRunner`](https://cs.chromium.org/chromium/src/base/sequenced_task_runner.h).
+[`base::SequencedTaskRunner`](https://cs.chromium.org/chromium/src/base/sequenced_task_runner.h).
 
 ### Posting to a New Sequence
 
-A `SequencedTaskRunner` can be created by
+A `base::SequencedTaskRunner` can be created by
 `base::CreateSequencedTaskRunnerWithTraits()`.
 
 ```cpp
@@ -159,14 +285,14 @@ sequenced_task_runner->PostTask(FROM_HERE, base::BindOnce(&TaskB));
 
 ### Posting to the Current Sequence
 
-The `SequencedTaskRunner` to which the current task was posted can be obtained
-via
-[`SequencedTaskRunnerHandle::Get()`](https://cs.chromium.org/chromium/src/base/threading/sequenced_task_runner_handle.h).
+The `base::SequencedTaskRunner` to which the current task was posted can be
+obtained via
+[`base::SequencedTaskRunnerHandle::Get()`](https://cs.chromium.org/chromium/src/base/threading/sequenced_task_runner_handle.h).
 
 *** note
-**NOTE:** it is invalid to call `SequencedTaskRunnerHandle::Get()` from a
+**NOTE:** it is invalid to call `base::SequencedTaskRunnerHandle::Get()` from a
 parallel task, but it is valid from a single-threaded task (a
-`SingleThreadTaskRunner` is a `SequencedTaskRunner`).
+`base::SingleThreadTaskRunner` is a `base::SequencedTaskRunner`).
 ***
 
 ```cpp
@@ -182,8 +308,13 @@ base::SequencedTaskRunnerHandle::Get()->
 ## Using Sequences Instead of Locks
 
 Usage of locks is discouraged in Chrome. Sequences inherently provide
-thread-safety. Prefer classes that are always accessed from the same sequence to
-managing your own thread-safety with locks.
+thread-safety. Prefer classes that are always accessed from the same
+sequence to managing your own thread-safety with locks.
+
+**Thread-safe but not thread-affine; how so?** Tasks posted to the same sequence
+will run in sequential order. After a sequenced task completes, the next task
+may be picked up by a different worker thread, but that task is guaranteed to
+see any side-effects caused by the previous one(s) on its sequence.
 
 ```cpp
 class A {
@@ -223,14 +354,14 @@ other_task_runner->PostTask(FROM_HERE,
 Locks should only be used to swap in a shared data structure that can be
 accessed on multiple threads.  If one thread updates it based on expensive
 computation or through disk access, then that slow work should be done without
-holding on to the lock.  Only when the result is available should the lock be
-used to swap in the new data.  An example of this is in PluginList::LoadPlugins
-([`content/common/plugin_list.cc`](https://cs.chromium.org/chromium/src/content/
-common/plugin_list.cc). If you must use locks,
+holding the lock.  Only when the result is available should the lock be used to
+swap in the new data.  An example of this is in PluginList::LoadPlugins
+([`content/browser/plugin_list.cc`](https://cs.chromium.org/chromium/src/content/browser/plugin_list.cc).
+If you must use locks,
 [here](https://www.chromium.org/developers/lock-and-condition-variable) are some
 best practices and pitfalls to avoid.
 
-In order to write non-blocking code, many APIs in Chromium are asynchronous.
+In order to write non-blocking code, many APIs in Chrome are asynchronous.
 Usually this means that they either need to be executed on a particular
 thread/sequence and will return results via a custom delegate interface, or they
 take a `base::Callback<>` object that is called when the requested operation is
@@ -240,8 +371,8 @@ PostTask sections above.
 ## Posting Multiple Tasks to the Same Thread
 
 If multiple tasks need to run on the same thread, post them to a
-[`SingleThreadTaskRunner`](https://cs.chromium.org/chromium/src/base/single_thread_task_runner.h).
-All tasks posted to the same `SingleThreadTaskRunner` run on the same thread in
+[`base::SingleThreadTaskRunner`](https://cs.chromium.org/chromium/src/base/single_thread_task_runner.h).
+All tasks posted to the same `base::SingleThreadTaskRunner` run on the same thread in
 posting order.
 
 ### Posting to the Main Thread or to the IO Thread in the Browser Process
@@ -275,7 +406,7 @@ TODO
 ### Posting to a Custom SingleThreadTaskRunner
 
 If multiple tasks need to run on the same thread and that thread doesn’t have to
-be the main thread or the IO thread, post them to a `SingleThreadTaskRunner`
+be the main thread or the IO thread, post them to a `base::SingleThreadTaskRunner`
 created by `base::CreateSingleThreadTaskRunnerWithTraits`.
 
 ```cpp
@@ -287,29 +418,25 @@ single_thread_task_runner->PostTask(FROM_HERE, base::BindOnce(&TaskA));
 single_thread_task_runner->PostTask(FROM_HERE, base::BindOnce(&TaskB));
 ```
 
-*** note
-**IMPORTANT:** You should rarely need this, most classes in Chromium require
-thread-safety (which sequences provide) not thread-affinity. If an API you’re
-using is incorrectly thread-affine (i.e. using
-[`base::ThreadChecker`](https://cs.chromium.org/chromium/src/base/threading/thread_checker.h)
-when it’s merely thread-unsafe and should use
-[`base::SequenceChecker`](https://cs.chromium.org/chromium/src/base/sequence_checker.h)),
-please consider fixing it instead of making things worse by also making your API thread-affine.
-***
+Remember that we [prefer sequences to physical
+threads](#prefer-sequences-to-physical-threads) and that this thus should rarely
+be necessary.
 
 ### Posting to the Current Thread
 
 *** note
 **IMPORTANT:** To post a task that needs mutual exclusion with the current
 sequence of tasks but doesn’t absolutely need to run on the current thread, use
-`SequencedTaskRunnerHandle::Get()` instead of `ThreadTaskRunnerHandle::Get()`
-(ref. [Posting to the Current Sequence](#Posting-to-the-Current-Sequence)). That
-will better document the requirements of the posted task. In a single-thread
-task, `SequencedTaskRunnerHandle::Get()` is equivalent to
-`ThreadTaskRunnerHandle::Get()`.
+`base::SequencedTaskRunnerHandle::Get()` instead of
+`base::ThreadTaskRunnerHandle::Get()` (ref. [Posting to the Current
+Sequence](#Posting-to-the-Current-Sequence)). That will better document the
+requirements of the posted task and will avoid unnecessarily making your API
+thread-affine. In a single-thread task, `base::SequencedTaskRunnerHandle::Get()`
+is equivalent to `base::ThreadTaskRunnerHandle::Get()`.
 ***
 
-To post a task to the current thread, use [`ThreadTaskRunnerHandle`](https://cs.chromium.org/chromium/src/base/threading/thread_task_runner_handle.h).
+To post a task to the current thread, use
+[`base::ThreadTaskRunnerHandle`](https://cs.chromium.org/chromium/src/base/threading/thread_task_runner_handle.h).
 
 ```cpp
 // The task will run on the current thread in the future.
@@ -318,17 +445,18 @@ base::ThreadTaskRunnerHandle::Get()->PostTask(
 ```
 
 *** note
-**NOTE:** It is invalid to call `ThreadTaskRunnerHandle::Get()` from a parallel
+**NOTE:** It is invalid to call `base::ThreadTaskRunnerHandle::Get()` from a parallel
 or a sequenced task.
 ***
 
 ## Posting Tasks to a COM Single-Thread Apartment (STA) Thread (Windows)
 
 Tasks that need to run on a COM Single-Thread Apartment (STA) thread must be
-posted to a `SingleThreadTaskRunner` returned by
-`CreateCOMSTATaskRunnerWithTraits()`. As mentioned in [Posting Multiple Tasks to
-the Same Thread](#Posting-Multiple-Tasks-to-the-Same-Thread), all tasks posted
-to the same `SingleThreadTaskRunner` run on the same thread in posting order.
+posted to a `base::SingleThreadTaskRunner` returned by
+`base::CreateCOMSTATaskRunnerWithTraits()`. As mentioned in [Posting Multiple
+Tasks to the Same Thread](#Posting-Multiple-Tasks-to-the-Same-Thread), all tasks
+posted to the same `base::SingleThreadTaskRunner` run on the same thread in
+posting order.
 
 ```cpp
 // Task(A|B|C)UsingCOMSTA will run on the same COM STA thread.
@@ -353,18 +481,19 @@ com_sta_task_runner->PostTask(FROM_HERE, base::BindOnce(&TaskBUsingCOMSTA));
 
 ## Annotating Tasks with TaskTraits
 
-[`TaskTraits`](https://cs.chromium.org/chromium/src/base/task/task_traits.h)
-encapsulate information about a task that helps the task scheduler make better
+[`base::TaskTraits`](https://cs.chromium.org/chromium/src/base/task/task_traits.h)
+encapsulate information about a task that helps the thread pool make better
 scheduling decisions.
 
-All `PostTask*()` functions in
+All `base::PostTask*()` functions in
 [`base/task/post_task.h`](https://cs.chromium.org/chromium/src/base/task/post_task.h)
-have an overload that takes `TaskTraits` as argument and one that doesn’t. The
-overload that doesn’t take `TaskTraits` as argument is appropriate for tasks
-that:
+have an overload that takes `base::TaskTraits` as argument and one that doesn’t.
+The overload that doesn’t take `base::TaskTraits` as argument is appropriate for
+tasks that:
 - Don’t block (ref. MayBlock and WithBaseSyncPrimitives).
 - Prefer inheriting the current priority to specifying their own.
-- Can either block shutdown or be skipped on shutdown (task scheduler is free to choose a fitting default).
+- Can either block shutdown or be skipped on shutdown (thread pool is free to
+  choose a fitting default).
 Tasks that don’t match this description must be posted with explicit TaskTraits.
 
 [`base/task/task_traits.h`](https://cs.chromium.org/chromium/src/base/task/task_traits.h)
@@ -373,7 +502,7 @@ provides additional traits in
 [`content/public/browser/browser_task_traits.h`](https://cs.chromium.org/chromium/src/content/public/browser/browser_task_traits.h)
 to facilitate posting a task onto a BrowserThread.
 
-Below are some examples of how to specify `TaskTraits`.
+Below are some examples of how to specify `base::TaskTraits`.
 
 ```cpp
 // This task has no explicit TaskTraits. It cannot block. Its priority
@@ -382,7 +511,7 @@ Below are some examples of how to specify `TaskTraits`.
 // block shutdown or be skipped on shutdown.
 base::PostTask(FROM_HERE, base::BindOnce(...));
 
-// This task has the highest priority. The task scheduler will try to
+// This task has the highest priority. The thread pool will try to
 // run it before USER_VISIBLE and BEST_EFFORT tasks.
 base::PostTaskWithTraits(
     FROM_HERE, {base::TaskPriority::USER_BLOCKING},
@@ -411,8 +540,8 @@ base::PostTaskWithTraits(
 Do not perform expensive work on the main thread, the IO thread or any sequence
 that is expected to run tasks with a low latency. Instead, perform expensive
 work asynchronously using `base::PostTaskAndReply*()` or
-`SequencedTaskRunner::PostTaskAndReply()`. Note that asynchronous/overlapped
-I/O on the IO thread are fine.
+`base::SequencedTaskRunner::PostTaskAndReply()`. Note that
+asynchronous/overlapped I/O on the IO thread are fine.
 
 Example: Running the code below on the main thread will prevent the browser from
 responding to user input for a long time.
@@ -442,7 +571,7 @@ base::PostTaskWithTraitsAndReplyWithResult(
 ### Posting a One-Off Task with a Delay
 
 To post a task that must run once after a delay expires, use
-`base::PostDelayedTask*()` or `TaskRunner::PostDelayedTask()`.
+`base::PostDelayedTask*()` or `base::TaskRunner::PostDelayedTask()`.
 
 ```cpp
 base::PostDelayedTaskWithTraits(
@@ -543,9 +672,22 @@ cancelable_task_tracker.TryCancelAll();
 
 To test code that uses `base::ThreadTaskRunnerHandle`,
 `base::SequencedTaskRunnerHandle` or a function in
-[`base/task/post_task.h`](https://cs.chromium.org/chromium/src/base/task/post_task.h), instantiate a
+[`base/task/post_task.h`](https://cs.chromium.org/chromium/src/base/task/post_task.h),
+instantiate a
 [`base::test::ScopedTaskEnvironment`](https://cs.chromium.org/chromium/src/base/test/scoped_task_environment.h)
-for the scope of the test.
+for the scope of the test. If you need BrowserThreads, use
+`content::TestBrowserThreadBundle` instead of
+`base::test::ScopedTaskEnvironment`.
+
+Tests can run the `base::test::ScopedTaskEnvironment`'s message pump using a
+`base::RunLoop`, which can be made to run until `Quit()` (explicitly or via
+`RunLoop::QuitClosure()`), or to `RunUntilIdle()` ready-to-run tasks and
+immediately return.
+
+ScopedTaskEnvironment configures RunLoop::Run() to LOG(FATAL) if it hasn't been
+explicitly quit after TestTimeouts::action_timeout(). This is preferable to
+having the test hang if the code under test fails to trigger the RunLoop to
+quit. The timeout can be overridden with ScopedRunTimeoutForTest.
 
 ```cpp
 class MyTest : public testing::Test {
@@ -577,14 +719,14 @@ TEST(MyTest, MyTest) {
   run_loop.Run();
   // D and run_loop.QuitClosure() have been executed. E is still in the queue.
 
-  // Tasks posted to task scheduler run asynchronously as they are posted.
+  // Tasks posted to thread pool run asynchronously as they are posted.
   base::PostTaskWithTraits(FROM_HERE, base::TaskTraits(), base::BindOnce(&F));
   auto task_runner =
       base::CreateSequencedTaskRunnerWithTraits(base::TaskTraits());
   task_runner->PostTask(FROM_HERE, base::BindOnce(&G));
 
-  // To block until all tasks posted to task scheduler are done running:
-  base::TaskScheduler::GetInstance()->FlushForTesting();
+  // To block until all tasks posted to thread pool are done running:
+  base::ThreadPool::GetInstance()->FlushForTesting();
   // F and G have been executed.
 
   base::PostTaskWithTraitsAndReplyWithResult(
@@ -599,33 +741,33 @@ TEST(MyTest, MyTest) {
 }
 ```
 
-## Using TaskScheduler in a New Process
+## Using ThreadPool in a New Process
 
-TaskScheduler needs to be initialized in a process before the functions in
+ThreadPool needs to be initialized in a process before the functions in
 [`base/task/post_task.h`](https://cs.chromium.org/chromium/src/base/task/post_task.h)
-can be used. Initialization of TaskScheduler in the Chrome browser process and
+can be used. Initialization of ThreadPool in the Chrome browser process and
 child processes (renderer, GPU, utility) has already been taken care of. To use
-TaskScheduler in another process, initialize TaskScheduler early in the main
+ThreadPool in another process, initialize ThreadPool early in the main
 function:
 
 ```cpp
-// This initializes and starts TaskScheduler with default params.
-base::TaskScheduler::CreateAndStartWithDefaultParams(“process_name”);
+// This initializes and starts ThreadPool with default params.
+base::ThreadPool::CreateAndStartWithDefaultParams(“process_name”);
 // The base/task/post_task.h API can now be used. Tasks will be // scheduled as
 // they are posted.
 
-// This initializes TaskScheduler.
-base::TaskScheduler::Create(“process_name”);
+// This initializes ThreadPool.
+base::ThreadPool::Create(“process_name”);
 // The base/task/post_task.h API can now be used. No threads // will be created
 // and no tasks will be scheduled until after Start() is called.
-base::TaskScheduler::GetInstance()->Start(params);
-// TaskScheduler can now create threads and schedule tasks.
+base::ThreadPool::GetInstance()->Start(params);
+// ThreadPool can now create threads and schedule tasks.
 ```
 
-And shutdown TaskScheduler late in the main function:
+And shutdown ThreadPool late in the main function:
 
 ```cpp
-base::TaskScheduler::GetInstance()->Shutdown();
+base::ThreadPool::GetInstance()->Shutdown();
 // Tasks posted with TaskShutdownBehavior::BLOCK_SHUTDOWN and
 // tasks posted with TaskShutdownBehavior::SKIP_ON_SHUTDOWN that
 // have started to run before the Shutdown() call have now completed their
@@ -644,16 +786,21 @@ used in an eventual leaf. The leaf can and should now obtain its TaskRunner
 directly from
 [`base/task/post_task.h`](https://cs.chromium.org/chromium/src/base/task/post_task.h).
 
-Dependency injection of TaskRunners can still seldomly be useful to unit test a
-component when triggering a specific race in a specific way is essential to the
-test. For such cases the preferred approach is the following:
+As mentioned above, `base::test::ScopedTaskEnvironment` allows unit tests to
+control tasks posted from underlying TaskRunners. In rare cases where a test
+needs to more precisely control task ordering: dependency injection of
+TaskRunners can be useful. For such cases the preferred approach is the
+following:
 
 ```cpp
-class FooWithCustomizableTaskRunnerForTesting {
+class Foo {
  public:
 
+  // Overrides |background_task_runner_| in tests.
   void SetBackgroundTaskRunnerForTesting(
-      scoped_refptr<base::SequencedTaskRunner> background_task_runner);
+      scoped_refptr<base::SequencedTaskRunner> background_task_runner) {
+    background_task_runner_ = std::move(background_task_runner);
+  }
 
  private:
   scoped_refptr<base::SequencedTaskRunner> background_task_runner_ =
@@ -664,3 +811,6 @@ class FooWithCustomizableTaskRunnerForTesting {
 
 Note that this still allows removing all layers of plumbing between //chrome and
 that component since unit tests will use the leaf layer directly.
+
+## FAQ
+See [Threading and Tasks FAQ](threading_and_tasks_faq.md) for more examples.
