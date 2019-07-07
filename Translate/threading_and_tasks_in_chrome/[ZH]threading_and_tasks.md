@@ -85,24 +85,16 @@ This documentation assumes familiarity with computer science
  * **Thread pool（线程池）**: 一个物理线程池，他们共用一个任务队列。在Chrome中是`base::ThreadPool`。
    一个Chrome进程只有一个实例， 它用作处理由[`base/task/post_task.h`](https://cs.chromium.org/chromium/src/base/task/post_task.h)
    发布的任务， 你很少需要直接使用`base::ThreadPool`的接口（更多的是发布任务）。
- * **Sequence** or **Virtual thread**: A chrome-managed thread of execution.
-   Like a physical thread, only one task can run on a given sequence / virtual
-   thread at any given moment and each task sees the side-effects of the
-   preceding tasks. Tasks are executed sequentially but may hop physical
-   threads between each one.
- * **Task runner**: An interface through which tasks can be posted. In Chrome
-   this is `base::TaskRunner`.
- * **Sequenced task runner**: A task runner which guarantees that tasks posted
-   to it will run sequentially, in posted order. Each such task is guaranteed to
-   see the side-effects of the task preceding it. Tasks posted to a sequenced
-   task runner are typically processed by a single thread (virtual or physical).
-   In Chrome this is `base::SequencedTaskRunner` which is-a
-   `base::TaskRunner`.
- * **Single-thread task runner**: A sequenced task runner which guarantees that
-   all tasks will be processed by the same physical thread. In Chrome this is
-   `base::SingleThreadTaskRunner` which is-a `base::SequencedTaskRunner`. We
-   [prefer sequences to threads](#prefer-sequences-to-physical-threads) whenever
-   possible.
+ * **Sequence** or **Virtual thread** **（序列/虚拟线程）**: 一个Chrome管理的执行线程。
+   像一个物理线程，同一时间只能有一个任务运行在指定的序列/虚拟线程，而且每个任务可以
+   看到前一个任务的结果。 任务被序列化的执行，但是可能在不同的物理线程间跳转。
+ * **Task runner（任务执行器）**: 提供一个发布任务的接口。 在Chrome中它是`base::TaskRunner`。
+ * **Sequenced task runner（序列任务执行器）**: 一个可以让发布的任务顺序执行的任务执行器。
+   发布到序列任务执行器中的任务一般在单个线程（虚拟/物理）中处理。 Chrome中它是
+   `base::SequencedTaskRunner`继承自`base::TaskRunner`。
+ * **Single-thread task runner（单线程任务执行器）**: 它是一个序列任务执行器， 而且
+   所有的任务将在同一个物理线程中执行。在Chrome中，它是 `base::SingleThreadTaskRunner`，
+   继承于`base::SequencedTaskRunner`。 我们强烈建议[尽量使用序列任务执行器](#prefer-sequences-to-physical-threads)。
 
 ## Threading Lexicon
 Note to the reader: the following terms are an attempt to bridge the gap between
@@ -143,9 +135,45 @@ necessary.
    scenarios. See [Prefer Sequences to
    Threads](#prefer-sequences-to-physical-threads) below for more details.
 
+## Threading Lexicon
+提醒读者：以下的条目尝试介绍Chrome是如何使用/实现一些通用线程命名的。 如果你刚刚开始可能
+有些困难。 可以尝试先跳过这一部分，阅读下面更详细的章节后再回来看这里。
+
+ * **Thread-unsafe**: The vast majority of types in Chrome are thread-unsafe
+   (by design). Access to such types/methods must be externally synchronized.
+   Typically thread-unsafe types require that all tasks accessing their state be
+   posted to the same `base::SequencedTaskRunner` and they verify this in debug
+   builds with a `SEQUENCE_CHECKER` member. Locks are also an option to
+   synchronize access but in Chrome we strongly
+   [prefer sequences to locks](#Using-Sequences-Instead-of-Locks).
+ * **Thread-affine**: Such types/methods need to be always accessed from the
+   same physical thread (i.e. from the same `base::SingleThreadTaskRunner`) and
+   typically have a `THREAD_CHECKER` member to verify that they are. Short of
+   using a third-party API or having a leaf dependency which is thread-affine:
+   there's pretty much no reason for a type to be thread-affine in Chrome.
+   Note that `base::SingleThreadTaskRunner` is-a `base::SequencedTaskRunner` so
+   thread-affine is a subset of thread-unsafe. Thread-affine is also sometimes
+   referred to as **thread-hostile**.
+ * **Thread-safe**: Such types/methods can be safely accessed concurrently.
+ * **Thread-compatible**: Such types provide safe concurrent access to const
+   methods but require synchronization for non-const (or mixed const/non-const
+   access). Chrome doesn't expose reader-writer locks; as such, the only use
+   case for this is objects (typically globals) which are initialized once in a
+   thread-safe manner (either in the single-threaded phase of startup or lazily
+   through a thread-safe static-local-initialization paradigm a la
+   `base::NoDestructor`) and forever after immutable.
+ * **Immutable**: A subset of thread-compatible types which cannot be modified
+   after construction.
+ * **Sequence-friendly**: Such types/methods are thread-unsafe types which
+   support being invoked from a `base::SequencedTaskRunner`. Ideally this would
+   be the case for all thread-unsafe types but legacy code sometimes has
+   overzealous checks that enforce thread-affinity in mere thread-unsafe
+   scenarios. See [Prefer Sequences to
+   Threads](#prefer-sequences-to-physical-threads) below for more details.
+
 ### Threads
 
-每个chrome的进程中有：
+Every Chrome process has
 
 * a main thread
    * in the browser process (BrowserThread::UI): updates the UI
@@ -156,16 +184,32 @@ necessary.
 * a few more special-purpose threads
 * and a pool of general-purpose threads
 
+Most threads have a loop that gets tasks from a queue and runs them (the queue
+may be shared between multiple threads).
+
+### Threads
+
+每个chrome的进程中有：
+
+* 一个主线程
+   * browser进程中 (BrowserThread::UI): 更新UI
+   * renderer进程中 (Blink main thread): 运行大多的Blink
+* 一个IO线程
+   * browser进程中 (BrowserThread::IO): 处理IPCs和网络请求
+   * renderer进程中: 处理IPCs
+* 一些特殊用途的线程
+* 以及一个线程池用于一般用途
+
 大多数线程都有一个循环，从队列中拿到任务并执行（整个队列可以被多个线程使用）。
 
 ### Tasks
 
-任务的本质是一个`base::OnceClosure`对象，会被添加到队列中异步执行。
+A task is a `base::OnceClosure` added to a queue for asynchronous execution.
 
-使用`base::BindOnce`可以创建一个`base::OnceClosure`对象(ref. 
-[Callback<> and Bind() documentation](https://chromium.googlesource.com/chromium/src/+/master/docs/callback.md))。 
-`base::OnceClosure`对象中存储着一个函数指针，以及参数。 他有一个`Run()`方法，会使用
-存储的参数执行这个函数指针。 
+A `base::OnceClosure` stores a function pointer and arguments. It has a `Run()`
+method that invokes the function pointer using the bound arguments. It is
+created using `base::BindOnce`. (ref. [Callback<> and Bind()
+documentation](callback.md)).
 
 ```
 void TaskA() {}
@@ -186,7 +230,54 @@ A group of tasks can be executed in one of the following ways:
    * [COM Single Threaded](#Posting-Tasks-to-a-COM-Single-Thread-Apartment-STA_Thread-Windows_):
      A variant of single threaded with COM initialized.
 
+### Tasks
+
+任务的本质是一个`base::OnceClosure`对象，会被添加到队列中异步执行。
+
+使用`base::BindOnce`可以创建一个`base::OnceClosure`对象(ref. 
+[Callback<> and Bind() documentation](https://chromium.googlesource.com/chromium/src/+/master/docs/callback.md))。 
+`base::OnceClosure`对象中存储着一个函数指针，以及参数。 他有一个`Run()`方法，会使用
+存储的参数执行这个函数指针。 
+
+```
+void TaskA() {}
+void TaskB(int v) {}
+
+auto task_a = base::BindOnce(&TaskA);
+auto task_b = base::BindOnce(&TaskB, 42);
+```
+
+一组任务会以下列某一种方式执行：
+
+* [Parallel（并行）](#Posting-a-Parallel-Task): 任务无序的执行， 可能所有的任务同一
+  时间在不同的线程中执行
+* [Sequenced（序列）](#Posting-a-Sequenced-Task): 任务被有序的执行， 同一时间只有
+  一个任务在任意线程中执行
+* [Single Threaded（单线程）](#Posting-Multiple-Tasks-to-the-Same-Thread): 任务
+  被有序执行， 同一时间只有一个任务在某一特定线程中执行
+   * [COM Single Threaded](#Posting-Tasks-to-a-COM-Single-Thread-Apartment-STA_Thread-Windows_):
+     A variant of single threaded with COM initialized.
+
 ### Prefer Sequences to Physical Threads
+
+Sequenced execution (on virtual threads) is strongly preferred to
+single-threaded execution (on physical threads). Except for types/methods bound
+to the main thread (UI) or IO threads: thread-safety is better achieved via
+`base::SequencedTaskRunner` than through managing your own physical threads
+(ref. [Posting a Sequenced Task](#posting-a-sequenced-task) below).
+
+All APIs which are exposed for "current physical thread" have an equivalent for
+"current sequence"
+([mapping](threading_and_tasks_faq.md#How-to-migrate-from-SingleThreadTaskRunner-to-SequencedTaskRunner)).
+
+If you find yourself writing a sequence-friendly type and it fails
+thread-affinity checks (e.g., `THREAD_CHECKER`) in a leaf dependency: consider
+making that dependency sequence-friendly as well. Most core APIs in Chrome are
+sequence-friendly, but some legacy types may still over-zealously use
+ThreadChecker/ThreadTaskRunnerHandle/SingleThreadTaskRunner when they could
+instead rely on the "current sequence" and no longer be thread-affine.
+
+### 首选序列替代物理线程
 
 Sequenced execution (on virtual threads) is strongly preferred to
 single-threaded execution (on physical threads). Except for types/methods bound
