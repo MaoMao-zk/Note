@@ -22,9 +22,16 @@
         * xml
         * 。。。
     * [★]虚拟机
+    * [★]GC
+        * [Java/Android内存泄漏(Memory Leak)(6种情况)](https://blog.csdn.net/Emmanuel__/article/details/83792868)
+        * [Java 内存溢出和Java泄露的几种情况](https://blog.csdn.net/keep_learn/article/details/104656377)
+        * TODO: 以上链接有些冗余和错误，需要再整理
 
 * Android
     * [★]开发环境
+        * https://developer.android.google.cn/studio/
+        * [Could not determine the dependencies of task ':app:compileDebugJavaWithJavac'.](https://zhidao.baidu.com/question/557861208389292692.html)
+            * 当compileSdkVersion设置太高时有这种问题，结局方法时设置低一点
     * [★]调试
     * [★]工程
         * Gradle
