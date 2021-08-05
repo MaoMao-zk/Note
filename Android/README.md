@@ -3,17 +3,18 @@
 
 * JAVA
     * 基本语法
-        * [★]异常
+        * [★]~~异常~~
+        * [Java 到底是值传递还是引用传递？](https://www.zhihu.com/question/31203609)
     * 特殊语法
-        * [★]反射
+        * [★]~~反射~~
         * [★]语法糖/注解
         * [★]动态代理
     * 基础API
         * [★]线程、异步、并发、线程池
         * [★]I/O
-        * [★]文本/字符串
+        * [★]~~文本/字符串~~
         * [★]序列化
-        * [★]容器
+        * [★]~~容器~~
         * 网络
         * 图像
         * 音频
@@ -65,3 +66,5 @@ Android Best Practices
 Advanced Android Development — Practicals
 * https://google-developer-training.github.io/android-developer-advanced-course-practicals/
 
+《Android开发艺术探索》 - 源码
+* https://github.com/singwhatiwanna/android-art-res
