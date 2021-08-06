@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.lang.reflect.*;
 import java.util.Scanner;
 import java.lang.ClassNotFoundException;
+import java.lang.annotation.Target;
 
 
 
@@ -134,7 +135,7 @@ class ReflectTest extends TestCase {
     }
 }
 
-public class Test {
+public class App {
     public static void main(String[] args) {
         System.out.println("Hello World!");
 

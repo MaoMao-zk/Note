@@ -7,11 +7,14 @@
         * [Java 到底是值传递还是引用传递？](https://www.zhihu.com/question/31203609)
     * 特殊语法
         * [★]~~反射~~
-        * [★]语法糖/注解
+        * [★]~~语法糖/注解~~
+            * JUnit - Java单元测试框架，使用注解
+            * ReactNative使用ReactModule注解构建ModuleRegistry
         * [★]动态代理
     * 基础API
         * [★]线程、异步、并发、线程池
         * [★]I/O
+            * [使用Gradle输入报错问题](https://stackoverflow.com/questions/19344661/run-failed-java-util-nosuchelementexception)
         * [★]~~文本/字符串~~
         * [★]序列化
         * [★]~~容器~~
