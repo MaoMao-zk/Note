@@ -16,7 +16,10 @@
         * [★]I/O
             * [使用Gradle输入报错问题](https://stackoverflow.com/questions/19344661/run-failed-java-util-nosuchelementexception)
         * [★]~~文本/字符串~~
-        * [★]序列化
+        * [★]~~序列化~~
+            * Java : implements Serializable
+            * Android : implements Parcelable
+            * Others: Thrift, protobuf ...
         * [★]~~容器~~
         * 网络
         * 图像
