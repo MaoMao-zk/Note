@@ -12,7 +12,13 @@
             * ReactNative使用ReactModule注解构建ModuleRegistry
         * [★]动态代理
     * 基础API
-        * [★]线程、异步、并发、线程池
+        * [★]~~线程、异步、并发、线程池~~
+            * 线程：继承Thread、继承Runable、继承Callable
+            * 线程池：Executor（execute、submit、schedule）
+            * 异常：继承Thread.UncaughtExceptionHandler
+            * 异步：Future、DelayQueue
+            * 并发：Mutex、synchronized、wait() & notify()、AtomicXXX、volatile
+            * TODO：Android并发
         * [★]I/O
             * [使用Gradle输入报错问题](https://stackoverflow.com/questions/19344661/run-failed-java-util-nosuchelementexception)
         * [★]~~文本/字符串~~
@@ -21,11 +27,16 @@
             * Android : implements Parcelable
             * Others: Thrift, protobuf ...
         * [★]~~容器~~
+        * 匿名函数
+            * Lambda 表达式：() -> {}
+            * 接口式函数：@FunctionalInterface
         * 网络
         * 图像
         * 音频
         * 加解密
-        * [★]sql
+        * [★]数据库
+            * JDBC（Java DataBase Connectivity）
+                * ![JDBC vs diff DB](http://img.mukewang.com/wiki/5ef2d39b09806ad210391056.jpg)
         * xml
         * 。。。
     * [★]虚拟机
