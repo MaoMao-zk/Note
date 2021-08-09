@@ -10,7 +10,8 @@
         * [★]~~语法糖/注解~~
             * JUnit - Java单元测试框架，使用注解
             * ReactNative使用ReactModule注解构建ModuleRegistry
-        * [★]动态代理
+        * [★]~~动态代理~~
+            * Proxy.newProxyInstance
     * 基础API
         * [★]~~线程、异步、并发、线程池~~
             * 线程：继承Thread、继承Runable、继承Callable
