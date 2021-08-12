@@ -51,6 +51,7 @@
         * https://developer.android.google.cn/studio/
         * [Could not determine the dependencies of task ':app:compileDebugJavaWithJavac'.](https://zhidao.baidu.com/question/557861208389292692.html)
             * 当compileSdkVersion设置太高时有这种问题，结局方法时设置低一点
+        * [Android Studio Build窗口出现中文乱码问题](https://blog.csdn.net/qq_31796651/article/details/108249199)
     * [★]调试
     * [★]工程
         * Gradle
@@ -65,6 +66,8 @@
         * Resource Managment
         * Notification Managment
         * [★]Activity Managment & Navigation
+            * [Android中Activity之间通信](https://www.cnblogs.com/tmlee/p/4978709.html)
+            * [Android启动Activity的两种方式与四种启动模式*](https://www.cnblogs.com/chenxibobo/p/6136626.html)
         * [★]Content Provider
         * Device APIs
         * [★]IPC
