@@ -71,7 +71,6 @@
         * [★]Content Provider
         * Device APIs
         * [★]IPC
-    * 
 
 
 ## 参考
