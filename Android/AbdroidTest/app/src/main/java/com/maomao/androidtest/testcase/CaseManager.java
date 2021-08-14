@@ -1,5 +1,6 @@
 package com.maomao.androidtest.testcase;
 
+import android.content.Context;
 import android.content.Intent;
 import android.app.Activity;
 
@@ -11,7 +12,11 @@ import com.maomao.androidtest.TestCaseActivity;
 import com.maomao.androidtest.testcase.TestCase;
 import com.maomao.androidtest.util.LogWithUI;
 
-class ErrorCase implements TestCase {
+class ErrorCase extends TestCase {
+    ErrorCase(Context c) {
+        super(c);
+    }
+
     @Override
     public String getName() {
         return "ErrorCase";
@@ -31,9 +36,11 @@ public class CaseManager {
         public void run(String s);
     }
 
-    public CaseManager(SwitchTestCaseRunnable runnable) {
+    public CaseManager(Context c, SwitchTestCaseRunnable runnable) {
+        context = c;
         switchTestCaseActivity = runnable;
         caseSet.add("Error");
+        caseSet.add("ThreadTest");
     }
 
     public Set<String> getCaseList() {
@@ -50,14 +57,18 @@ public class CaseManager {
     }
 
     TestCase createTestCase(String name) {
+        // 实打实
         switch(name) {
+            case "ThreadTest":
+                return new ThreadTest(context);
             case "Error":
             default:
-                return new ErrorCase();
+                return new ErrorCase(context);
         }
     }
 
     Set<String> caseSet = new HashSet<String>();
     TestCase currentCase;
     SwitchTestCaseRunnable switchTestCaseActivity;
+    Context context;
 }

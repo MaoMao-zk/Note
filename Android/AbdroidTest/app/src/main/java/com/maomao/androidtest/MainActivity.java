@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     .commitNow();
         }
 
-        caseManager = new CaseManager((String name) -> {
+        caseManager = new CaseManager(this, (String name) -> {
             Intent intent = new Intent(MainActivity.this, TestCaseActivity.class);
             intent.putExtra("name", name);
             LogWithUI.I("Switch to TestCase: " + name);

@@ -74,6 +74,13 @@
         * [★]Content Provider
         * Device APIs
         * [★]IPC
+        * Thread
+            * AsyncTask was deprecated!
+            * [Android 四种异步操作UI界面的方法](https://blog.csdn.net/qq_34308476/article/details/51392882)
+                * Handler - 需要当前线程有Looper在运行
+                * AsyncTask - 已经废弃，而且需要在主线程执行
+                * View.post（Runnable ) - 需要有view的实例
+                * Activity.runOnUiThread（Runnable )  - 需要有activity的实例
 
 
 ## 参考
