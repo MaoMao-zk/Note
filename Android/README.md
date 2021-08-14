@@ -52,6 +52,9 @@
         * [Could not determine the dependencies of task ':app:compileDebugJavaWithJavac'.](https://zhidao.baidu.com/question/557861208389292692.html)
             * 当compileSdkVersion设置太高时有这种问题，结局方法时设置低一点
         * [Android Studio Build窗口出现中文乱码问题](https://blog.csdn.net/qq_31796651/article/details/108249199)
+        * Ctrl+/ 默认在一行的开头加注释，setting里可以设置为按照缩进加注释
+            * ![Comment Setting](./.res/comment-setting.png)
+            * ![Comment Setting2](./.res/comment-setting-2.png)
     * [★]调试
     * [★]工程
         * Gradle
