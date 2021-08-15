@@ -6,9 +6,13 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.JobIntentService;
 
 import com.maomao.androidtest.util.LogWithUI;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -17,30 +21,6 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-
-class MyIntentService extends IntentService {
-    public MyIntentService() {
-        super("zk-thread");
-        LogWithUI.I("MyIntentService is constructed");
-    }
-
-    @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
-        String action = intent.getStringExtra("action");
-        switch (action) {
-            case "task":
-                LogWithUI.I("MyIntentService is running task");
-                break;
-            case "abnormal":
-                String abnormal = intent.getStringExtra("abnormal");
-                LogWithUI.I("MyIntentService receive a abnormal:" + abnormal);
-                break;
-            default:
-                LogWithUI.I("MyIntentService receive a unknow action:" + action);
-                break;
-        }
-    }
-}
 
 public class ThreadTest extends TestCase {
     ThreadTest(Context c) {
@@ -68,14 +48,9 @@ public class ThreadTest extends TestCase {
 
         threadPool.execute(task);
 
-        Intent intent = new Intent(context, MyIntentService.class);
+        Intent intent = new Intent();
         intent.putExtra("action", "task");
-        ComponentName result = context.startService(intent);
-        if (result == null) {
-            LogWithUI.I("context.startService return null");
-        } else {
-            LogWithUI.I("context.startService return " + result);
-        }
+        MyIntentService.enqueueWork(context, intent);
 
         try {
             task.get(1000, TimeUnit.MILLISECONDS);
@@ -99,9 +74,10 @@ public class ThreadTest extends TestCase {
         } catch (InterruptedException e) {
             LogWithUI.I("TwoSecondTask is interrupted.");
             // e.printStackTrace();
-            Intent intent = new Intent(context, MyIntentService.class);
+            Intent intent = new Intent();
             intent.putExtra("action", "abnormal");
             intent.putExtra("abnormal", "TwoSecondTask is interrupted.");
+            MyIntentService.enqueueWork(context, intent);
             context.startService(intent);
         }
         LogWithUI.I("End running TwoSecondTask.");
