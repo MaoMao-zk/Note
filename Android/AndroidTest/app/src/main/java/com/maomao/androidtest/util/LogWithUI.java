@@ -3,8 +3,11 @@ package com.maomao.androidtest.util;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.widget.TextView;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -13,15 +16,15 @@ public class LogWithUI {
     public static void I(String s) {
         s = "[" + Thread.currentThread().getName() + "] " + s;
         Log.i("LogWithUI", s);
-        if (Looper.getMainLooper().getThread() == Thread.currentThread()) {
-            printOnUI(s);
-        } else {
-            String asyncString = s;
-            textView.post(() -> {
-                printOnUI(asyncString);
-            });
-        }
 
+        String asyncString = s;
+        appendText.post(() -> {
+            textViewLock.lock();
+            if (textView != null) {
+                textView.append(asyncString + "\n");
+            }
+            textViewLock.unlock();
+        });
     }
 
     public static void RegisterTextView(TextView v) {
@@ -30,14 +33,7 @@ public class LogWithUI {
         textViewLock.unlock();
     }
 
-    static void printOnUI(String s) {
-        textViewLock.lock();
-        if (textView != null) {
-            textView.append(s + "\n");
-        }
-        textViewLock.unlock();
-    }
-
     static TextView textView;
     static Lock textViewLock = new ReentrantLock();
+    static Handler appendText = Handler.createAsync(Looper.getMainLooper());
 }

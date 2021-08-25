@@ -17,7 +17,9 @@
         * ThreadLocal
     1. IPC
         * Pre：Android多进程、service、Activity独立进程
-        * XXX
+        * Binder
+        * Messager
+        * Content Provider
     1. 综合技术
         * 动态加载
         * CrashHandler
