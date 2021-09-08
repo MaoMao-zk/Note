@@ -1,5 +1,16 @@
 # IoT
 
+## RTOS
+
+* FreeRTOS
+    * https://www.freertos.org/index.html
+* ThreadX
+    * https://github.com/azure-rtos/threadx
+
+* RTOS文件系统对比：LittleFS Vs. SPIFFS
+    * https://www.cnblogs.com/gmpy/p/12498999.html?utm_source=tuicool&utm_medium=referral
+    * https://github.com/littlefs-project/littlefs
+
 ## 车联网
 
 需要一个稳定的RTOS？AUTOSAR 或者ROS，或者其他
