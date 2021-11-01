@@ -82,3 +82,14 @@ git rebase f0866a803cdb170bdaac538d83b5650aefae7dfd --interactive
 # 5. git rebase --continue
 git rebase --continue
 ```
+
+### BFG Repo-Cleaner
+Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
+
+https://rtyley.github.io/bfg-repo-cleaner/
+
+### Remove file from repos
+https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+
+### git LFS(Large File Storage)
+https://about.gitlab.com/blog/2017/01/30/getting-started-with-git-lfs-tutorial/
